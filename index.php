@@ -153,12 +153,12 @@ session_start();
                         <div><button id="register_button" type="button" onClick="showDialog('register')">Register for premium account</button></div>
                     </div>
                 </div>
-<?  if(!empty($error)):     ?>
+<?php  if(!empty($error)):     ?>
                 <div class="error"><?= $error ?></div>
-<?  endif;                  ?>   
-<?  if(!empty($comment)):     ?>
+<?php  endif;                  ?>   
+<?php  if(!empty($comment)):     ?>
                 <div class="comment"><?= $comment ?></div>
-<?  endif;                  ?>   
+<?php  endif;                  ?>   
             </div>
             <div>
                 <div id="signin_light" class="signin_content">

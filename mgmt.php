@@ -136,7 +136,8 @@
     <meta name="author" content="" />
     <title>phoVents</title>
     <script type="text/javascript">
-        <? echo "var phovents = " . $js_array . ";\n"; ?>
+        var phovents = <?= $js_array ?>;
+
         $(function() {
             $( "#datepicker" ).datepicker();
         });
@@ -217,9 +218,9 @@
                     <div id="fade" class="black_overlay"></div>
                 </div>
             </div>
-<?  if(!empty($error)):     ?>
+<?php  if(!empty($error)):     ?>
                 <div class="mg_error"><?= $error ?></div>
-<?  endif;                  ?>   
+<?php  endif;                  ?>   
         </center>
     </span>
     
