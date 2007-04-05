@@ -8,10 +8,12 @@ input[type='file'] {
 }
 
 input[type='button'] {
-    width : 400px;
-    height : 110px;
+    width : 800px;
+    height : 240px;
+    background-color : white;
+    border : 0;
     font-size : 0px;
-    background-image : url(../images/upload.png)
+    background-image : url(../../images/upload_photo.png)
 }
 
 img {
