@@ -7,13 +7,20 @@
     </head>
  
     <body>
+        <div class="logo">
+            <img src="../images/logo_mob.png" />
+        </div>
+        <div class="input_div">
+            <div class="i_label">phoVent</div>
+            <div class="i_phovent"><input class="select_input" type="text" /></div>
+        </div>
         <form id="form1" enctype="multipart/form-data" method="post" action="">
-            <div>
+            <div class="select_div">
                 <label for="fileToUpload"><img src="images/choose.png"</label>
                 <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();" accept="image/*" capture="camera" />
             </div>
             <div id="details"></div>
-            <div>
+            <div class="upload_button">
                 <input type="button" onclick="uploadFile()" value="Upload" />
             </div>
             <div id="progress"></div>
