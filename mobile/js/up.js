@@ -9,7 +9,8 @@ function fileSelected()
             fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
         else
             fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
-        document.getElementById('details').innerHTML += 'Name: ' + file.name + '<br>Size: ' + fileSize + '<br>Type: ' + file.type;
+        //document.getElementById('details').innerHTML += 'Name: ' + file.name + '<br>Size: ' + fileSize + '<br>Type: ' + file.type;
+        document.getElementById('details').innerHTML += 'Size: ' + fileSize;
         document.getElementById('details').innerHTML += '<p>';
     }
 }
@@ -17,6 +18,8 @@ function fileSelected()
 function uploadFile() 
 {
     var fd = new FormData();
+    var phovent = document.getElementById('select_input').value;
+    fd.append('phoVent', phovent);
     var count = document.getElementById('fileToUpload').files.length;
     for (var index = 0; index < count; index ++){
         var file = document.getElementById('fileToUpload').files[index];
