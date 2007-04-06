@@ -14,7 +14,7 @@ input[type='button'] {
     background-color : white;
     border : 0;
     font-size : 0px;
-    background-image : url(../../images/upload_photo.png)
+    background-image : url(../images/upload_photo.png)
 }
 
 img {

@@ -1,9 +1,9 @@
 function fileSelected() 
 {
-    var count = document.getElementById('fileToUpload').files.length;
+    var count = document.getElementById('fupload').files.length;
     document.getElementById('details').innerHTML = "";
     for (var index = 0; index < count; index ++){
-        var file = document.getElementById('fileToUpload').files[index];
+        var file = document.getElementById('fupload').files[index];
         var fileSize = 0;
         if (file.size > 1024 * 1024)
             fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
@@ -19,11 +19,11 @@ function uploadFile()
 {
     var fd = new FormData();
     var phovent = document.getElementById('select_input').value;
-    fd.append('phoVent', phovent);
-    var count = document.getElementById('fileToUpload').files.length;
+    fd.append('phovent', phovent);
+    var count = document.getElementById('fupload').files.length;
     for (var index = 0; index < count; index ++){
-        var file = document.getElementById('fileToUpload').files[index];
-        fd.append('myFile', file);
+        var file = document.getElementById('fupload').files[index];
+        fd.append('fupload[]', file);
     }
 
     var xhr = new XMLHttpRequest();
@@ -31,7 +31,7 @@ function uploadFile()
     xhr.addEventListener("load", uploadComplete, false);
     xhr.addEventListener("error", uploadFailed, false);
     xhr.addEventListener("abort", uploadCanceled, false);
-    xhr.open("POST", "savetofile.php");
+    xhr.open("POST", "upload.php");
     xhr.send(fd);
 }
 

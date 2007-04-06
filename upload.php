@@ -7,7 +7,6 @@
  *
  ******************************************************/
 
-//die(var_dump($_FILES));
 $phovent = $_POST['phovent'];
 setcookie('phovent', $phovent);
 
@@ -34,7 +33,7 @@ if(isset($_FILES)) {
     $index = 0;
     foreach($_FILES['fupload']['name'] as $filename){
      
-        if(preg_match('/[.](jpg)|(gif)|(png)$/i', $filename)) {
+        if(preg_match('/[.](jpg)|(jpeg)|(gif)|(png)$/i', $filename)) {
              
             if($instance != NULL){
                 $l_filename = strtolower($filename);
@@ -68,7 +67,7 @@ if(isset($_FILES)) {
         }
         $index++;
     }
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
+   // header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 
 function createSmallImages($image, $filename) 

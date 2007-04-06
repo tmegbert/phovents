@@ -8,7 +8,7 @@
  
     <body>
         <div class="logo">
-            <img src="../images/logo_mob.png" />
+            <img src="images/logo_mob.png" />
         </div>
         <div class="input_div">
             <div class="i_label">phoVent</div>
@@ -16,8 +16,8 @@
         </div>
         <form id="form1" enctype="multipart/form-data" method="post" action="">
             <div class="select_div">
-                <label for="fileToUpload"><img src="../images/select_photo.png"</label>
-                <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();" accept="image/*" capture="camera" />
+                <label for="fupload"><img src="images/select_photo.png"</label>
+                <input type="file" name="fupload[]" multiple="multiple" id="fupload" onchange="fileSelected();" accept="image/*" capture="camera" />
             </div>
             <div id="details"></div>
             <div class="upload_button">
