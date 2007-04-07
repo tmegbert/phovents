@@ -48,7 +48,10 @@ function uploadProgress(evt)
 /* This event is raised when the server send back a response */
 function uploadComplete(evt) 
 {
-    alert(evt.target.responseText);
+    //alert(evt.target.responseText);
+    alert('Upload complete!');
+    document.getElementById('progress').innerHTML = "";
+    document.getElementById('details').innerHTML = "";
 }
 
 function uploadFailed(evt) 
