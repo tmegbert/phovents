@@ -24,7 +24,6 @@ foreach($images as $image){
 <script type="text/javascript"> 
     var jsArray = <? echo json_encode($imageWidths); ?>;
     var rw = getRowWidth();
-    console.log(rw);
  
     var count = 0;
     var total = 0;
@@ -40,6 +39,7 @@ foreach($images as $image){
             var widthArray = new Array();
             var newWidthArray = new Array();
             var ratios = new Array();
+            var rowSpaces = new Array();
             for(j = 0; j < count; ++j){
                 widthArray[j] = jsArray[i-count+j].width;
                 newWidthArray[j] = jsArray[i-count+j].width;
@@ -50,7 +50,6 @@ foreach($images as $image){
             }
             totalW += (count-1) * 10;
             var amountToAdd = rw - totalW;
-            console.log('pre-redo=' + totalW);
             while(totalW < rw){
                 height++;
                 totalW = 0;
@@ -61,10 +60,26 @@ foreach($images as $image){
                 }
             }
             // write out the html
+            for(j = 0; j < count - 1; ++j){
+                rowSpaces[j] = 10;
+            }
+            var leftOver = totalW - rw;
+            var index = 0;
+            while(leftOver > 0){
+                rowSpaces[index]--;      
+                if(index == count -2){
+                    index = 0;
+                } else {
+                    index++;
+                }
+                leftOver--;
+            }
+                
             var message = "";
+            index = 0;
             for(j=0;j<count;++j){
                 if(j!=count - 1) {
-                    message += newWidthArray[j] + "x" + height + " 10 ";
+                    message += newWidthArray[j] + "x" + height + " " + rowSpaces[index++] + " ";
                 } else {
                     message += newWidthArray[j] + "x" + height;
                 }
