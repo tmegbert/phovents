@@ -19,24 +19,53 @@ foreach($images as $image){
 ?>
 <html>
 <head>
-<title>Blah</title>
+<title>phoVents</title>
 <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
 <script type="text/javascript"> 
     var jsArray = <? echo json_encode($imageWidths); ?>;
     var rw = getRowWidth();
-    var htmlstuff = getHTML(jsArray);
- 
 
-    window.onresize = function() {
-        var rw = getRowWidth();
-        console.log(rw);
+    $(document).ready(function() {
+        getHTML(jsArray);
+    });
+
+    function debouncer( func , timeout ) {
+       var timeoutID , timeout = timeout || 500;
+       return function () {
+          var scope = this , args = arguments;
+          clearTimeout( timeoutID );
+          timeoutID = setTimeout( function () {
+              func.apply( scope , Array.prototype.slice.call( args ) );
+          } , timeout );
+       }
     }
 
-    function getHTML(jsArray)
+
+    $( window ).resize( debouncer( function ( e ) {
+        rw = getRowWidth();
+        removeDOMClass("imgele");
+        removeDOMClass("imgdiv");
+        removeDOMClass("layout-row");
+        getHTML();
+    } ) );
+
+    function removeDOMClass(classname)
+    {
+        var list = document.getElementsByClassName(classname);
+        for(var i = list.length - 1; 0 <= i; i--)
+            if(list[i] && list[i].parentElement)
+                list[i].parentElement.removeChild(list[i]);
+    }
+
+    function getHTML()
     {
         var count = 0;
         var total = 0;
         var rowTop = 0;
+        var mainDiv = document.createElement('div');;
+        mainDiv.id = "gallery_div";
+        mainDiv.className = "layout-row";
+        mainDiv.style.marginLeft = "40px";
         for(i = 0; i < jsArray.length; ++i){
             var imageW = jsArray[i].width;
             if((total + imageW) <= rw){
@@ -71,9 +100,6 @@ foreach($images as $image){
                 }
                 // write out the html
                 var left = 0;
-                var message = " top:" + rowTop;
-                message += " height:" + height;
-                console.log(message);
                 for(j = 0; j < count - 1; ++j){
                     rowSpaces[j] = 10;
                 }
@@ -91,11 +117,24 @@ foreach($images as $image){
                     
                 index = 0;
                 for(j=0;j<count;++j){
+                    // create div here
+                    var imageDiv = document.createElement('div');
+                    imageDiv.style.position = 'relative';
+                    imageDiv.style.top = rowTop;
+                    imageDiv.style.left = left;
+                    imageDiv.className = "imgdiv";
+
+                    var imageElement = document.createElement('img');
+                    imageElement.src = jsArray[i-count+j].image;
+                    imageElement.style.height = height;
+                    imageElement.style.position = 'absolute';
+                    imageElement.className = "imgele";
+
+                    imageDiv.appendChild(imageElement);
+                    mainDiv.appendChild(imageDiv);
+                    
                     if(j!=count - 1) {
-                        console.log("    " + jsArray[i-count+j].image + " left:" + left);
                         left += newWidthArray[j] + rowSpaces[index++];
-                    } else {
-                        console.log("    " + jsArray[i-count+j].image + " left:" + left);
                     }
                 }
                 //new row
@@ -105,12 +144,13 @@ foreach($images as $image){
                 total = imageW;
             }
         }
-       // return message;
+        document.body.appendChild(mainDiv);
     }
 
     function getRowWidth()
     {
-        var browserW = window.innerWidth - 200;
+        var browserW = window.innerWidth - 100;
+/*
         var rowWidth = 0;
         var index = 0;
         while(rowWidth < browserW){
@@ -119,12 +159,13 @@ foreach($images as $image){
             index++;
         }
         rowWidth -= jsArray[index].width + 10;
-        return rowWidth;
+*/
+       // return rowWidth;
+        return browserW;
     }
         
 </script>
 </head>
 <body>
-<div> Duh!</div>
 </body>
 </html>
