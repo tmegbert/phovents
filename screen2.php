@@ -1,6 +1,8 @@
 <?php
-$thumbDir = "images/magic/Powell/thumb";
+$phovent = $_POST['phoVent'];
+$thumbDir = "images/magic/" . $phovent . "/thumb";
 $images = array_diff(scandir($thumbDir), array('..', '.'));
+
 $imageWidths = array();
 $index = 0;
 foreach($images as $image){
@@ -163,9 +165,12 @@ foreach($images as $image){
        // return rowWidth;
         return browserW;
     }
-        
+// colors tried
+// black
+// #081985   dark blue 
+// #0d3d00   dark green
 </script>
 </head>
-<body>
+<body style="background-color:#333333">
 </body>
 </html>

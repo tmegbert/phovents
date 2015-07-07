@@ -6,6 +6,7 @@
 <html>
  
 <head>
+    <link rel="icon" href="./favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
     <meta name="author" content="" />

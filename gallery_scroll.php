@@ -26,8 +26,6 @@ foreach($images as $image){
     <title>phoVents</title>
     <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
     <link rel="stylesheet" href="css/gallery.css" type="text/css"></link>
-    <link rel="stylesheet" href="lightbox/lightbox.css" type="text/css" media="screen"></link>
-    <script type="text/javascript" src="lightbox/lightbox.js"></script>
     <script type="text/javascript"> 
         var jsArray = <? echo json_encode($imageWidths); ?>;
         var rw = getRowWidth();
@@ -54,7 +52,6 @@ foreach($images as $image){
             removeDOMClass("imgdiv");
             removeDOMClass("layout-row");
             getHTML();
-            location.reload();
         } ) );
 
         function removeDOMClass(classname)
@@ -132,18 +129,13 @@ foreach($images as $image){
                         imageDiv.style.left = left;
                         imageDiv.className = "imgdiv";
 
-                        var anchorParent = document.createElement('a');
-                        anchorParent.setAttribute('href', jsArray[i-count+j].midsize);
-                        anchorParent.setAttribute('rel', "lightbox");
-
                         var imageElement = document.createElement('img');
                         imageElement.src = jsArray[i-count+j].image;
                         imageElement.style.height = height;
                         imageElement.style.position = 'absolute';
                         imageElement.className = "imgele";
 
-                        anchorParent.appendChild(imageElement);
-                        imageDiv.appendChild(anchorParent);
+                        imageDiv.appendChild(imageElement);
                         mainDiv.appendChild(imageDiv);
                         
                         if(j!=count - 1) {

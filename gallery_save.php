@@ -54,7 +54,6 @@ foreach($images as $image){
             removeDOMClass("imgdiv");
             removeDOMClass("layout-row");
             getHTML();
-            location.reload();
         } ) );
 
         function removeDOMClass(classname)
