@@ -67,6 +67,7 @@ foreach($images as $image){
 
         function getHTML()
         {
+            var ratios = new Array();
             var count = 0;
             var total = 0;
             var rowTop = 0;
@@ -85,7 +86,6 @@ foreach($images as $image){
                     var totalW = 0;
                     var widthArray = new Array();
                     var newWidthArray = new Array();
-                    var ratios = new Array();
                     var rowSpaces = new Array();
                     for(j = 0; j < count; ++j){
                         widthArray[j] = jsArray[i-count+j].width;
@@ -155,6 +155,75 @@ foreach($images as $image){
                     
                     count = 1;
                     total = imageW;
+                    
+                }
+                if(i == jsArray.length -1){
+                    //display the last row
+                    height = 200;
+                    totalW = 0;
+                    widthArray = new Array();
+                    newWidthArray = new Array();
+                    rowSpaces = new Array();
+                    for(j = 0; j < count; ++j){
+                        widthArray[j] = jsArray[i-count+j+1].width;
+                        newWidthArray[j] = jsArray[i-count+j+1].width;
+                        totalW += widthArray[j];
+                        if(typeof ratios[widthArray[j]] === 'undefined') {
+                            ratios[widthArray[j]] = widthArray[j] / height;
+                        }
+                    }
+                    totalW += (count-1) * 10;
+                    var amountToAdd = rw - totalW;
+                    while(totalW < rw && height < 300){
+                        height++;
+                        totalW = 0;
+                        for(j=0;j<count;++j){
+                            newWidthArray[j] = Math.round(height * ratios[widthArray[j]]);
+                            totalW += newWidthArray[j];
+                            if(j!=0){totalW += 10};
+                        }
+                    }
+                    // write out the html
+                    left = 0;
+                    for(j = 0; j < count - 1; ++j){
+                        rowSpaces[j] = 10;
+                    }
+                    var leftOver = totalW - rw;
+                    var index = 0;
+                    while(leftOver > 0){
+                        rowSpaces[index]--;      
+                        if(index == count -2){
+                            index = 0;
+                        } else {
+                            index++;
+                        }
+                        leftOver--;
+                    }
+                        
+                    index = 0;
+                    for(j=0;j<count;++j){
+                        var imageDiv = document.createElement('div');
+                        imageDiv.style.position = 'relative';
+                        imageDiv.style.top = rowTop;
+                        imageDiv.style.left = left;
+                        imageDiv.className = "imgdiv";
+
+                        var anchorParent = document.createElement('a');
+                        anchorParent.setAttribute('href', jsArray[i-count+j+1].midsize);
+                        anchorParent.setAttribute('rel', "lightbox");
+
+                        var imageElement = document.createElement('img');
+                        imageElement.src = jsArray[i-count+j+1].image;
+                        imageElement.style.height = height;
+                        imageElement.style.position = 'absolute';
+                        imageElement.className = "imgele";
+
+                        anchorParent.appendChild(imageElement);
+                        imageDiv.appendChild(anchorParent);
+                        mainDiv.appendChild(imageDiv);
+                        
+                        left += newWidthArray[j] + rowSpaces[index++];
+                    }
                 }
             }
             document.body.appendChild(mainDiv);
