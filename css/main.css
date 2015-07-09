@@ -1,3 +1,8 @@
+body {
+    color : #0D0D6B;
+    width : 1400px;
+}
+
 .center {
 
     text-align : center;
@@ -6,4 +11,82 @@
 .input {
     font-family : Arial;
     font-size : 12px;
+}
+
+#footer {
+    font-family : Arial;
+    color : white;
+    font-size: 10pt;
+    width: 100%;
+    height: 18px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background:#0D0D6B;
+}
+
+#copyright {
+    margin-top : 2px;
+    width: 50%;
+    float: right;
+}
+
+#privacy {
+    margin-top : 2px;
+    margin-right: 40px;
+    color: white;
+    float: right;
+}
+
+#terms {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size:8pt;
+}
+
+#left {
+    width:50%;
+}
+
+#content {
+    margin-top : 20px;
+}
+
+#left_container {
+    float:left;
+    width:820px;
+    margin-left:40px;
+}
+
+#right_container {
+    font-family : Arial;
+    font-size : 12pt;
+    margin-right : 40px;
+}
+
+#sol_div {
+    padding-top : 67px;
+}
+
+#sign-ups-left {
+    padding-bottom : 25px;
+}
+
+.left_cartoon {
+    float:left;
+    margin-top:100px;
+    font-family:Arial;
+}
+
+.left_button {
+    float : left;
+}
+
+.button {
+    padding : 5px;
+}
+
+#sample_heading {
+    margin-bottom : 0px;
+    color : #0D0D6B;
 }
