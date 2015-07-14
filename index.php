@@ -102,9 +102,6 @@
                     <h2 id="sample_heading">Sample phoVents</h2>
                 </div>
                 <div>
-                    (Chrome and Safari only for now)
-                </div>
-                <div>
                     <div class="left_button button">
                         <form action="gallery.php" method="POST">
                             <input type="submit" class="powell" name="phoVent" value="Powell" /> 
