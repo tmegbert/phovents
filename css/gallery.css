@@ -8,10 +8,6 @@ div.imgdiv {
     width : 30%;
 }
 
-html, body {
-    max-width : 100%;
-    overflow-x: hidden;
-}
 
 #gallery_div {
     width: inherit;

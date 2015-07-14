@@ -26,8 +26,8 @@ foreach($images as $image){
     <title>phoVents</title>
     <script language="JavaScript" type="text/javascript" src="js/s_code.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-    <link rel="stylesheet" href="css/gallery.css" type="text/css"></link>
-    <link rel="stylesheet" href="lightbox/lightbox.css" type="text/css" media="screen"></link>
+    <link rel="stylesheet" href="css/gallery.css" type="text/css">
+    <link rel="stylesheet" href="lightbox/lightbox.css" type="text/css" media="screen">
     <script type="text/javascript" src="lightbox/lightbox.js"></script>
     <script type="text/javascript">
         var jsArray = <? echo json_encode($imageWidths); ?>;
