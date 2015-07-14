@@ -98,28 +98,33 @@
                         <div id="terms"><input id="terms_check" type="checkbox" name="terms_check" value="Terms">I have read and accept the <a href="tou.html" target="_blank">Terms of Use.</a></div>
                     </form>
                 </div>
-                <h2 id="sample_heading">Sample phoVents</h2>
+                <div>
+                    <h2 id="sample_heading">Sample phoVents</h2>
+                </div>
+                <div>
+                    (Chrome and Safari only for now)
+                </div>
                 <div>
                     <div class="left_button button">
                         <form action="gallery.php" method="POST">
-                            <input type="image" name="phoVent" value="Powell" src="images/lake_powell-button.jpg" /> 
+                            <input type="submit" class="powell" name="phoVent" value="Powell" /> 
                         </form>
                     </div>
                     <div class="button">
                         <form action="gallery.php" method="POST">
-                            <input type="image" name="phoVent" value="Arches" src="images/arches-button.jpg" /> 
+                            <input type="submit" class="arches" name="phoVent" value="Arches" /> 
                         </form>
                     </div>
                 </div>
                 <div>
                     <div class="left_button button">
                         <form action="gallery.php" method="POST">
-                            <input type="image" name="phoVent" value="Zion" src="images/zion-button.jpg" /> 
+                            <input type="submit" class="zion" name="phoVent" value="Zion" /> 
                         </form>
                     </div>
                     <div class="button">
                         <form action="gallery.php" method="POST">
-                            <input type="image" name="phoVent" value="Clouds" src="images/cloud-button.jpg" /> 
+                            <input type="submit" class="clouds" name="phoVent" value="Clouds" /> 
                         </form>
                     </div>
                 </div>

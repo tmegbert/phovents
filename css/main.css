@@ -60,12 +60,12 @@ body {
 
 #right_container {
     font-family : Arial;
-    font-size : 12pt;
+    font-size : 11pt;
     margin-right : 40px;
 }
 
 #sol_div {
-    padding-top : 67px;
+    padding-top : 47px;
 }
 
 #sign-ups-left {
@@ -98,6 +98,7 @@ body {
     height : 50px;
     border : 0;
     cursor : pointer;
+    font-size : 0.1px;
 }
 
 .zion {
@@ -106,6 +107,7 @@ body {
     height : 50px;
     border : 0;
     cursor : pointer;
+    font-size : 0.1px;
 }
 
 .arches {
@@ -114,6 +116,7 @@ body {
     height : 50px;
     border : 0;
     cursor : pointer;
+    font-size : 0.1px;
 }
 
 .clouds {
@@ -122,4 +125,5 @@ body {
     height : 50px;
     border : 0;
     cursor : pointer;
+    font-size : 0.1px;
 }
