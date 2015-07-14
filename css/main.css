@@ -75,6 +75,7 @@ body {
 .left_cartoon {
     float:left;
     margin-top:100px;
+    margin-right:10px;
     font-family:Arial;
 }
 
@@ -89,4 +90,36 @@ body {
 #sample_heading {
     margin-bottom : 0px;
     color : #0D0D6B;
+}
+
+.powell {
+    background-image : url('../images/lake_powell-button.jpg');
+    width : 200px;
+    height : 50px;
+    border : 0;
+    cursor : pointer;
+}
+
+.zion {
+    background-image : url('../images/zion-button.jpg');
+    width : 200px;
+    height : 50px;
+    border : 0;
+    cursor : pointer;
+}
+
+.arches {
+    background-image : url('../images/arches-button.jpg');
+    width : 200px;
+    height : 50px;
+    border : 0;
+    cursor : pointer;
+}
+
+.clouds {
+    background-image : url('../images/cloud-button.jpg');
+    width : 200px;
+    height : 50px;
+    border : 0;
+    cursor : pointer;
 }

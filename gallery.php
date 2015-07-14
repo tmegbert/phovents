@@ -24,6 +24,7 @@ foreach($images as $image){
 <html>
 <head>
     <title>phoVents</title>
+    <script language="JavaScript" type="text/javascript" src="js/s_code.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
     <link rel="stylesheet" href="css/gallery.css" type="text/css"></link>
     <link rel="stylesheet" href="lightbox/lightbox.css" type="text/css" media="screen"></link>
@@ -34,5 +35,29 @@ foreach($images as $image){
     <script type="text/javascript" src="js/gallery.js"></script>
 </head>
 <body style="background-color:#333333">
+    <script language="JavaScript" type="text/javascript"><!--
+        s.pageName="Gallery"
+        s.server="www.phovents.com"
+        s.channel=""
+        s.pageType=""
+        s.prop1=""
+        s.prop2=""
+        s.prop3=""
+        s.prop4=""
+        s.prop5=""
+        /* Conversion Variables */
+        s.campaign=""
+        s.state=""
+        s.zip=""
+        s.events=""
+        s.products=""
+        s.purchaseID=""
+        s.eVar1=""
+        s.eVar2=""
+        s.eVar3=""
+        s.eVar4=""
+        s.eVar5=""
+        var s_code=s.t();if(s_code)document.write(s_code)//-->
+    </script>
 </body>
 </html>

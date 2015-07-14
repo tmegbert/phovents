@@ -1,23 +1,25 @@
 <?php
     $email = $_POST['email'];
     $m = new MongoClient();
-    $db = $m->nerkasoft;
+    $db = $m->phovents;
+
+    $contacts = array();
+    $cursor = $db->contacts->find(array("email" => $email));
+    foreach ($cursor as $doc) {
+        $contacts[] = $doc['email'];
+    }
     $today = date("F j, Y, g:i a");
-    if(!empty($email)){
-        //$db->phovents->update(array("email" => $email, "date" => $today), array("email" => $email, "date" => $today), array("upsert" => true));
+    if(!empty($email) && !in_array($email, $contacts)){
+        $db->contacts->insert(array("email" => $email, "date" => $today));
+        $obj = $db->website->findOne();
+        $obj['freeSpots'] -= 1;
+        $db->website->update(array("_id" => $obj['_id']), $obj);
     }
 ?>
 <html>
     <head>
-        <script language="JavaScript" type="text/javascript" src="http://www.chalkogram.com/s_code.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        <script type="text/javascript" src="//use.typekit.net/fnd7wzw.js"></script>
-        <script type="text/javascript">
-            try{Typekit.load();}catch(e){}
-            
-            //save freeSpots in Mongo
-            localStorage.freeSpots -= 1;
-        </script>
+        <script language="JavaScript" type="text/javascript" src="js/s_code.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/thankyou.css">
     </head>
     <body>
         <script language="JavaScript" type="text/javascript"><!--
@@ -45,6 +47,6 @@
             var s_code=s.t();if(s_code)document.write(s_code)//-->
         </script>
         
-        <div id="thank_you">Thank you for your participation.<br>Your eMail address has been recorded.<br>We will contact you when the beta is ready.</div>
+        <div id="thank_you"><img src="images/thankyou.png"/></div>
     </body>
 </html>
