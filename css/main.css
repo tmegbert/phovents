@@ -1,16 +1,38 @@
 body {
-    color : #0D0D6B;
-    width : 1400px;
-}
-
-.center {
-
-    text-align : center;
+    color : #06065d;
+    font-family : Arial;
 }
 
 .input {
     font-family : Arial;
-    font-size : 12px;
+    font-size : 24px;
+    line-height : 28px;
+    width : 400px;
+    color : #06065d;
+}
+
+#signin_div {
+    border : 1px solid navy;
+    position : absolute;
+    top : 10px;
+    right : 10px;
+    width : 75px;
+    background-color : #06065d;
+}
+
+#signin_txt {
+    text-decoration : none;
+    line-height : 25px;
+    margin-left : 10px;
+    color : white;
+}
+
+#main {
+    width : 800px;
+}
+
+#logo {
+    margin-top : 200px;
 }
 
 #footer {
@@ -49,81 +71,23 @@ body {
 }
 
 #content {
-    margin-top : 20px;
+    width : 570px;
+    margin-right : auto;
+    margin-left : auto;
+    margin-top : 50px;
 }
 
-#left_container {
-    float:left;
-    width:820px;
-    margin-left:40px;
-}
-
-#right_container {
-    font-family : Arial;
-    font-size : 11pt;
-    margin-right : 40px;
-}
-
-#sol_div {
-    padding-top : 47px;
-}
-
-#sign-ups-left {
-    padding-bottom : 25px;
-}
-
-.left_cartoon {
-    float:left;
-    margin-top:100px;
-    margin-right:10px;
-    font-family:Arial;
-}
-
-.left_button {
+#name_div { 
     float : left;
+    margin-right : 10px;
+    font-size : 30px;
 }
 
-.button {
-    padding : 5px;
+#in_div {
+    float : left;
+    margin-top : 2px;
 }
 
-#sample_heading {
-    margin-bottom : 0px;
-    color : #0D0D6B;
-}
-
-.powell {
-    background-image : url('../images/lake_powell-button.jpg');
-    width : 200px;
-    height : 50px;
-    border : 0;
-    cursor : pointer;
-    font-size : 0.1px;
-}
-
-.zion {
-    background-image : url('../images/zion-button.jpg');
-    width : 200px;
-    height : 50px;
-    border : 0;
-    cursor : pointer;
-    font-size : 0.1px;
-}
-
-.arches {
-    background-image : url('../images/arches-button.jpg');
-    width : 200px;
-    height : 50px;
-    border : 0;
-    cursor : pointer;
-    font-size : 0.1px;
-}
-
-.clouds {
-    background-image : url('../images/cloud-button.jpg');
-    width : 200px;
-    height : 50px;
-    border : 0;
-    cursor : pointer;
-    font-size : 0.1px;
+#samples {
+    margin-left : 75px;
 }
