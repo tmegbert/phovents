@@ -1,0 +1,180 @@
+body {
+    color : #06065d;
+    font-family : Arial;
+}
+
+#logo {
+    margin-top : 50px;
+    margin-bottom : 20px;
+}
+
+.left {
+    float : left;
+}
+
+.right {
+    float : right;
+}
+
+.clear {
+    clear : both;
+}
+
+.signin_name {
+    margin-top : 4px;
+    color : #06065d;
+    float : left;
+}
+
+.usercard {
+    width : 300px;
+    background-color : white;
+    color : black;
+    float : left;
+    padding : 10px;
+}
+
+.cardtop {
+    height : 30px;
+    width : 290px;
+    background-color : white;
+    border-top : 1px solid #c9c8c5;
+    border-right : 3px solid #c9c8c5;
+    border-bottom : 1px solid #c9c8c5;
+    border-left : 1px solid #c9c8c5;
+    padding-top : 7px;
+    padding-left : 10px;
+}
+
+.cardcontent {
+    font-size: 12px;
+    height : 100px;
+    width : 300px;
+    background-color : white;
+    border-left : 1px solid #c9c8c5;
+    border-right : 3px solid #c9c8c5;
+    border-bottom : 3px solid #c9c8c5;
+}
+ .cardline {
+    padding : 10px;
+}
+
+.userButton {
+    border: 0;
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    background: #dbdbdb;
+}
+
+#cardText {
+    float : left;
+}
+
+#delCard {
+    float : right;
+    margin-right : 10px;
+}
+
+#editCard {
+    float : right;
+}
+
+#editButton {
+    background: url(../images/edit-icon_16.png);
+}
+
+#editButton:disabled {
+    background: url(../images/edit-icon_16-disabled.png);
+}
+
+#editButton:active {
+    background: url(../images/edit-icon_16-active.png);
+}
+
+#deleteButton {
+    background: url(../images/delete-icon_16.png);
+}
+
+#deleteButton:disabled {
+    background: url(../images/delete-icon_16-disabled.png);
+}
+
+#deleteButton:active {
+    background: url(../images/delete-icon_16-active.png);
+}
+
+#addPhovent_div {
+    margin-bottom : 20px;
+}
+
+#light {
+    color : black;
+}
+
+.black_overlay{
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index:1001;
+    -moz-opacity: 0.8;
+    opacity:.80;
+    filter: alpha(opacity=80);
+}
+
+.white_content {
+    display: none;
+    position: absolute;
+    top: 25%;
+    left: 30%;
+    width: 40%;
+    height: 41%;
+    padding: 6px;
+    border: 6px solid #00b3ff;
+    background-color: white;
+    z-index:1002;
+    overflow: auto;
+}
+
+.left {
+    float : left;
+}
+
+.right {
+    float : right;
+}
+
+#d_title {
+    font-size : 25px;
+}
+
+.clear {
+    clear : both;
+}
+
+.button_font {
+    font-size : 14px;
+}
+
+#cancel_button {
+    position : absolute;
+    right : 0;
+    bottom : 0;
+    margin-right : 90px;
+    margin-bottom : 10px;
+    font-size : 14px;
+}
+
+#save_button {
+    position : absolute;
+    right : 0;
+    bottom : 0;
+    margin-right : 10px;
+    margin-bottom : 10px;
+    font-size : 14px;
+    width : 70px;
+}
