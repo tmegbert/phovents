@@ -2,6 +2,8 @@ function populateCards()
 {
     var content = document.getElementById('content');
     for (var i in phovents){
+        var cdate = timeConverter(phovents[i]['creation_date']);
+        var edate = timeConverter(phovents[i]['expiration_date']);
         var card_div = document.createElement('div');
         card_div.className = "usercard";
 
@@ -21,16 +23,42 @@ function populateCards()
         edit_button.id = "editButton";
         edit_button.className = "userButton";
         edit_div.appendChild(edit_button);
+
         var del_div = document.createElement('div');
         del_div.id = "delCard";
         var del_button = document.createElement('button');
         del_button.setAttribute("onClick", "delCard(this);");
+        del_button.setAttribute("type", "submit");
         del_button.id = "deleteButton";
         del_button.className = "userButton";
         del_div.appendChild(del_button);
+
+        var name = document.createElement('input');
+        name.setAttribute("type", "hidden");
+        name.setAttribute("name", "name");
+        name.setAttribute("value", phovents[i]['name']);
+
+        var owner = document.createElement('input');
+        owner.setAttribute("type", "hidden");
+        owner.setAttribute("name", "owner");
+        owner.setAttribute("value", phovents[i]['owner']);
+
+        var action = document.createElement('input');
+        action.setAttribute("type", "hidden");
+        action.setAttribute("name", "action");
+        action.setAttribute("value", "delete");
+
+        var del_form = document.createElement('form');
+        del_form.setAttribute('method', "POST");
+        del_form.setAttribute('action', "mgmt.php");
+        del_form.appendChild(del_div);
+        del_form.appendChild(name);
+        del_form.appendChild(owner);
+        del_form.appendChild(action);
+
         text_div.innerHTML = phovents[i]['name'];
         name_div.appendChild(text_div);
-        name_div.appendChild(del_div);
+        name_div.appendChild(del_form);
         name_div.appendChild(edit_div);
 
         var desc_div = document.createElement('div');
@@ -39,11 +67,11 @@ function populateCards()
 
         var created_div = document.createElement('div');
         created_div.className = "cardline";
-        created_div.innerHTML = "Date created: " + phovents[i]['creation_date'];
+        created_div.innerHTML = "Date created: " + cdate;
 
         var expire_div = document.createElement('div');
         expire_div.className = "cardline";
-        expire_div.innerHTML = "Expiration date: " + phovents[i]['expiration_date'];
+        expire_div.innerHTML = "Expiration date: " + edate;
 
         ctop_div.appendChild(name_div);
         ccontent_div.appendChild(desc_div);
@@ -59,20 +87,20 @@ function populateCards()
 
 function addCard()
 {
-    showDialog('add');
+    document.getElementById('d_title').innerHTML = "Add a phoVent";
     document.getElementById('name').value = "";
     document.getElementById('desc').value = "";
-    document.getElementById('creation_date').value = "";
-    document.getElementById('expiration_date').value = "";
+    document.getElementById('datepicker').value = "";
+    showDialog('add');
 }
 
 function editCard(phoventName)
 {
+    document.getElementById('d_title').innerHTML = "Edit a phoVent";
     document.getElementById('name').value = phoventName;
     document.getElementById('desc').value = phovents[phoventName].description;
-    document.getElementById('creation_date').value = phovents[phoventName].creation_date;
-    document.getElementById('expiration_date').value = phovents[phoventName].expiration_date;
-    showDialog();
+    document.getElementById('datepicker').value = getExpireDate(phovents[phoventName].expiration_date);
+    showDialog('edit');
 }
 
 function delCard(obj)
@@ -80,19 +108,22 @@ function delCard(obj)
     alert('Deleting Card');
 }
 
-function showDialog()
+function showDialog(action)
 {
     document.getElementById('light').style.display='block';
     document.getElementById('fade').style.display='block';
+    if(action == "add"){
+        document.getElementById('cardAction').value = "add";
+    } else {
+        document.getElementById('cardAction').value = "edit";
+    }
 }
 
-function hideDialog(action)
+function hideDialog()
 {
     document.getElementById('light').style.display='none';
     document.getElementById('fade').style.display='none';
-    if ( action == 'save') {
-        //Do some stuff to save the user object
-    }
+    var form = document.getElementById('addForm');
 }
 
 function setCookie(cname, cvalue) {
@@ -112,6 +143,28 @@ function getCookie(cname)
         if (c.indexOf(name)==0) return c.substring(name.length,c.length);
     }
     return "";
+}
+
+function getExpireDate(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp * 1000);
+  var year = a.getFullYear();
+  var month = ("0" + Number(a.getMonth() + 1)).slice(-2);
+  var date = ("0" + a.getDate()).slice(-2);
+  var time = month + '/' + date + '/'  + year;
+  return time;
+}
+
+function timeConverter(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = ("0" + a.getHours()).slice(-2);;
+  var min = ("0" + a.getMinutes()).slice(-2);
+  var sec = ("0" + a.getSeconds()).slice(-2);
+  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  return time;
 }
 
 function signOut()

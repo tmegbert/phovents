@@ -5,7 +5,7 @@ body {
 
 .input {
     font-family : Arial;
-    font-size : 24px;
+    font-size : 20px;
     line-height : 28px;
     width : 300px;
     color : #06065d;
@@ -14,7 +14,7 @@ body {
 .label { 
     float : left;
     margin-right : 10px;
-    font-size : 26px;
+    font-size : 20px;
     margin-top : 24px;
     margin-left : 20px;
 }
@@ -148,7 +148,7 @@ body {
     top: 25%;
     left: 30%;
     width: 500px;
-    height: 180px;
+    height: 190px;
     padding: 6px;
     border: 6px solid #0f34d4;
     background-color: white;

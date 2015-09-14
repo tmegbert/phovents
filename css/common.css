@@ -31,6 +31,13 @@
     float : right;
 }
 
+#d_title {
+    font-size : 25px;
+    float : left;
+    margin-top : 5px;
+    margin-bottom : 5px;
+}
+
 #signin_txt {
     text-decoration : none;
     line-height : 25px;

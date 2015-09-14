@@ -123,7 +123,8 @@ session_start();
             <div>
                 <div id="signin_light" class="signin_content">
                     <form id="signinForm" action="mgmt.php" method="POST">
-                        <div>
+                        <div id="d_title">Sign-in</div>
+                        <div class="clear">
                             <div class="label">eMail</div>
                             <div class="input_box"><input id="s_email" class="input" type="text" name="email"/></div>
                         </div>
