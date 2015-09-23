@@ -2,6 +2,8 @@ function populateCards()
 {
     var content = document.getElementById('content');
     for (var i in phovents){
+        var name = phovents[i]['name'];
+        var id = 'del' + name + 'Form';
         var cdate = timeConverter(phovents[i]['creation_date']);
         var edate = timeConverter(phovents[i]['expiration_date']);
         var card_div = document.createElement('div');
@@ -19,7 +21,7 @@ function populateCards()
         var edit_div = document.createElement('div');
         edit_div.id = "editCard";
         var edit_button = document.createElement('button');
-        edit_button.setAttribute("onClick", "editCard('" + phovents[i]['name'] + "');");
+        edit_button.setAttribute("onClick", "editCard('" + name + "');");
         edit_button.id = "editButton";
         edit_button.className = "userButton";
         edit_div.appendChild(edit_button);
@@ -27,8 +29,8 @@ function populateCards()
         var del_div = document.createElement('div');
         del_div.id = "delCard";
         var del_button = document.createElement('button');
-        del_button.setAttribute("onClick", "delCard(this);");
-        del_button.setAttribute("type", "submit");
+        del_button.setAttribute("onClick", "delCard(\"" + name + "\");");
+        del_button.setAttribute("type", "button");
         del_button.id = "deleteButton";
         del_button.className = "userButton";
         del_div.appendChild(del_button);
@@ -51,6 +53,7 @@ function populateCards()
         var del_form = document.createElement('form');
         del_form.setAttribute('method', "POST");
         del_form.setAttribute('action', "mgmt.php");
+        del_form.id = id;
         del_form.appendChild(del_div);
         del_form.appendChild(name);
         del_form.appendChild(owner);
@@ -103,9 +106,13 @@ function editCard(phoventName)
     showDialog('edit');
 }
 
-function delCard(obj)
+function delCard(phoVent)
 {
-    alert('Deleting Card');
+    var id = 'del' + phoVent + 'Form';
+    var result = confirm('Are you sure you want to delete ' + phoVent + '?');
+    if(result == true){
+        document.getElementById(id).submit();
+    }
 }
 
 function showDialog(action)

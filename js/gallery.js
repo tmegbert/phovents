@@ -39,6 +39,7 @@ function getHTML()
     var count = 0;
     var total = 0;
     var rowTop = 0;
+    var phoIndex = 0;
     var mainDiv = document.createElement('div');;
     mainDiv.id = "gallery_div";
     mainDiv.className = "layout-row";
@@ -56,8 +57,9 @@ function getHTML()
             var newWidthArray = new Array();
             var rowSpaces = new Array();
             for(j = 0; j < count; ++j){
-                widthArray[j] = jsArray[i-count+j].width;
-                newWidthArray[j] = jsArray[i-count+j].width;
+                phoIndex = i-count+j;
+                widthArray[j] = jsArray[phoIndex].width;
+                newWidthArray[j] = jsArray[phoIndex].width;
                 totalW += widthArray[j];
                 if(typeof ratios[widthArray[j]] === 'undefined') {
                     ratios[widthArray[j]] = widthArray[j] / height;
@@ -93,6 +95,7 @@ function getHTML()
                 
             index = 0;
             for(j=0;j<count;++j){
+                phoIndex = i-count+j;
                 // create div here
                 var imageDiv = document.createElement('div');
                 imageDiv.style.position = 'relative';
@@ -101,18 +104,35 @@ function getHTML()
                 imageDiv.className = "imgdiv";
 
                 var anchorParent = document.createElement('a');
-                anchorParent.setAttribute('href', jsArray[i-count+j].midsize);
+                anchorParent.setAttribute('href', jsArray[phoIndex].midsize);
                 anchorParent.setAttribute('rel', "lightbox");
 
                 var imageElement = document.createElement('img');
-                imageElement.src = jsArray[i-count+j].image;
+                imageElement.src = jsArray[phoIndex].image;
                 imageElement.style.height = height;
                 imageElement.style.position = 'absolute';
                 imageElement.className = "imgele";
 
+                // download icon div
+                var downloadDiv = document.createElement('div');
+                downloadDiv.style.position = 'relative';
+                downloadDiv.style.top = rowTop + height - 40;
+                downloadDiv.style.left = left + 20;
+
+                var downloadAnchor = document.createElement('a');
+                downloadAnchor.setAttribute('href', 'download.php?download_file=' + jsArray[phoIndex].name);
+
+                var downloadIcon = document.createElement('img');
+                downloadIcon.src = 'images/download.png';
+                downloadIcon.style.position = 'absolute';
+                downloadIcon.style.height = 32;
+
                 anchorParent.appendChild(imageElement);
+                downloadAnchor.appendChild(downloadIcon);
                 imageDiv.appendChild(anchorParent);
+                downloadDiv.appendChild(downloadAnchor);
                 mainDiv.appendChild(imageDiv);
+                mainDiv.appendChild(downloadDiv);
                 
                 if(j!=count - 1) {
                     left += newWidthArray[j] + rowSpaces[index++];
@@ -125,7 +145,7 @@ function getHTML()
             total = imageW;
             
         }
-        if(i == jsArray.length -1){
+        if(i == jsArray.length - 1){
             //display the last row
             height = 200;
             totalW = 0;
@@ -133,8 +153,9 @@ function getHTML()
             newWidthArray = new Array();
             rowSpaces = new Array();
             for(j = 0; j < count; ++j){
-                widthArray[j] = jsArray[i-count+j+1].width;
-                newWidthArray[j] = jsArray[i-count+j+1].width;
+                phoIndex = i-count+j+1;
+                widthArray[j] = jsArray[phoIndex].width;
+                newWidthArray[j] = jsArray[phoIndex].width;
                 totalW += widthArray[j];
                 if(typeof ratios[widthArray[j]] === 'undefined') {
                     ratios[widthArray[j]] = widthArray[j] / height;
@@ -170,6 +191,7 @@ function getHTML()
                 
             index = 0;
             for(j=0;j<count;++j){
+                phoIndex = i-count+j+1;
                 var imageDiv = document.createElement('div');
                 imageDiv.style.position = 'relative';
                 imageDiv.style.top = rowTop;
@@ -177,18 +199,35 @@ function getHTML()
                 imageDiv.className = "imgdiv";
 
                 var anchorParent = document.createElement('a');
-                anchorParent.setAttribute('href', jsArray[i-count+j+1].midsize);
+                anchorParent.setAttribute('href', jsArray[phoIndex].midsize);
                 anchorParent.setAttribute('rel', "lightbox");
 
                 var imageElement = document.createElement('img');
-                imageElement.src = jsArray[i-count+j+1].image;
+                imageElement.src = jsArray[phoIndex].image;
                 imageElement.style.height = height;
                 imageElement.style.position = 'absolute';
                 imageElement.className = "imgele";
 
+                // download icon div
+                var downloadDiv = document.createElement('div');
+                downloadDiv.style.position = 'relative';
+                downloadDiv.style.top = rowTop + height - 40;
+                downloadDiv.style.left = left + 20;
+
+                var downloadAnchor = document.createElement('a');
+                downloadAnchor.setAttribute('href', 'download.php?download_file=' + jsArray[phoIndex].name);
+
+                var downloadIcon = document.createElement('img');
+                downloadIcon.src = 'images/download.png';
+                downloadIcon.style.position = 'absolute';
+                downloadIcon.style.height = 32;
+
                 anchorParent.appendChild(imageElement);
+                downloadAnchor.appendChild(downloadIcon);
                 imageDiv.appendChild(anchorParent);
+                downloadDiv.appendChild(downloadAnchor);
                 mainDiv.appendChild(imageDiv);
+                mainDiv.appendChild(downloadDiv);
                 
                 left += newWidthArray[j] + rowSpaces[index++];
             }

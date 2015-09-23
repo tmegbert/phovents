@@ -2,6 +2,7 @@
 $phovent = $_POST['phoVent'];
 $thumbDir = "images/magic/" . $phovent . "/thumb";
 $midsizeDir = "images/magic/" . $phovent . "/midsize";
+$fullsizeDir = "images/magic/" . $phovent . "/fullsize";
 $images = array_diff(scandir($thumbDir), array('..', '.'));
 
 $imageWidths = array();
@@ -13,8 +14,10 @@ foreach($images as $image){
     $imageD=new Imagick($thumb);
     $d = $imageD->getImageGeometry(); 
     $w = $d['width']; 
-    $imageWidths[$index]['image'] = $thumb;
+    $imageWidths[$index]['image'] = $fullsizeDir . "/" . $image;
     $imageWidths[$index]['midsize'] = $midsizeDir . "/" . $image;
+    $imageWidths[$index]['thumb'] = $thumb;
+    $imageWidths[$index]['name'] = $image;
     $imageWidths[$index]['width'] = $w;
     $index++;
 }

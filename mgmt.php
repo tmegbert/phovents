@@ -61,17 +61,17 @@
             $js_array = json_encode($phovents);
         } else {
             $salt = uniqid(mt_rand(), true);
-            $email = $_POST['email'];
+            $owner = $_POST['email'];
             $password = $_POST['password'];
             $hash = hash('sha512', $password.$salt);
-            $user = $db->users->findOne(array("email" => $email));
+            $user = $db->users->findOne(array("email" => $owner));
 
             $savedHash = $user['hash'];
             $savedSalt = $user['salt'];
             $hashMatch = hash('sha512', $password.$savedSalt);
             if($hashMatch == $savedHash){
                 $fullName = $user['first_name'] . " " . $user['last_name'];
-                $php_array = iterator_to_array($db->instances->find(array("owner" => $email)));
+                $php_array = iterator_to_array($db->instances->find(array("owner" => $owner)));
                 $phovents = array();
                 foreach($php_array as $id => $data){
                    $phovents[$data['name']] = $data;
@@ -175,7 +175,7 @@
                                 <div><button id="save_button" type="submit" onClick="hideDialog()">Save</button></div>
                             </div>
                             <input id="cardAction" type="hidden" name="action" value="add"/>
-                            <input type="hidden" name="owner" value="<?=$email ?>"/>
+                            <input type="hidden" name="owner" value="<?=$owner ?>"/>
                         </div>
                     </form>
                     <div id="fade" class="black_overlay"></div>

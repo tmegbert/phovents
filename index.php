@@ -125,11 +125,11 @@ session_start();
                     <form id="signinForm" action="mgmt.php" method="POST">
                         <div id="d_title">Sign-in</div>
                         <div class="clear">
-                            <div class="label">eMail</div>
+                            <div class="label">e-Mail</div>
                             <div class="input_box"><input id="s_email" class="input" type="text" name="email"/></div>
                         </div>
                         <div class="clear">
-                            <div class="label">passWord</div>
+                            <div class="label">Password</div>
                             <div class="input_box"><input id="s_pass" class="input" type="password" name="password" onKeyPress="return searchKeyPress(event, 'login');" /></div>
                         </div>
                         <div class="clear">
