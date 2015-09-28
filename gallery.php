@@ -62,5 +62,9 @@ foreach($images as $image){
         s.eVar5=""
         var s_code=s.t();if(s_code)document.write(s_code)//-->
     </script>
+    <div id="blackBar">
+        <div class="gallery_title">phoVent&nbsp;&nbsp;&nbsp;&nbsp;<?=$phovent?></div>
+        <div id="add_photo">+ Add a photo</div>
+    </div>
 </body>
 </html>
