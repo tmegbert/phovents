@@ -64,7 +64,14 @@ foreach($images as $image){
     </script>
     <div id="blackBar">
         <div class="gallery_title">phoVent&nbsp;&nbsp;&nbsp;&nbsp;<?=$phovent?></div>
-        <div id="add_photo">+ Add a photo</div>
+        <div id="add_photo">
+            <form enctype="multipart/form-data" action="upload.php" method="post">
+                + Add a photo 
+                <input type="file" name="fupload" />
+                <input type="submit" value="Go!" />
+                <input type="hidden" name="phovent" value="<?=$phovent?>">
+            </form>
+        </div>
     </div>
 </body>
 </html>

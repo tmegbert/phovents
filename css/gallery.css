@@ -31,13 +31,13 @@ div.imgdiv {
 .gallery_title {
     font-size : 30px;
     color : white;
-    padding-top : 10px;
+    padding-top : 14px;
     padding-left : 20px;
 }
 
 #add_photo {
     font-size : 20px;
-    color : green;
+    color : #57ff53;
     display : table;
-    margin : -23px auto;
+    margin : -24px auto;
 }
