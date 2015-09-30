@@ -24,7 +24,8 @@
                                 "path" => "/phovents/" . $name,
                                 "expiration_date" => $expiration_date,
                                 "creation_date" => $now,
-                                "owner" => $owner
+                                "owner" => $owner,
+                                "pic_count" => 0
             );
 
             $db->instances->insert($newPhovent); 

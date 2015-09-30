@@ -24,6 +24,33 @@ if(!file_exists(TARGET)){
     mkdir(THUMB_DIR);
 }
 
+
+if(isset($_FILES['fupload'])) {
+     
+    if(preg_match('/[.](jpg)|(gif)|(png)$/i', $_FILES['fupload']['name'])) {
+         
+        $m = new MongoClient();
+        $db = $m->phovents;
+        $instance = $db->instances->findOne(array("name" => $phovent));
+        if($instance != NULL){
+            $filename = $_FILES['fupload']['name'];
+            $l_filename = strtolower($filename);
+            $source = $_FILES['fupload']['tmp_name'];   
+            $parts = pathinfo(FULL_DIR . $l_filename);
+            $instance['pic_count']++;
+            $t_filename = "pv_" . strtolower($phovent) . "_" . sprintf('%04d',$instance['pic_count']) . "." . $parts['extension'];
+            $target = FULL_DIR . $t_filename;
+            $db->instances->update(array("_id" => $instance['_id']), $instance);
+             
+            move_uploaded_file($source, $target);
+             
+            createSmallImages($t_filename);     
+            
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
+    }
+}
+
 function createSmallImages($filename) {
      
     if(preg_match('/[.](jpg)$/', $filename)) {
@@ -60,22 +87,5 @@ function createSmallImages($filename) {
     $nm = imagecreatetruecolor($nx, $ny);
     imagecopyresized($nm, $im, 0,0,0,0,$nx,$ny,$ox,$oy);
     imagejpeg($nm, MID_DIR . $filename);
-}
-
-if(isset($_FILES['fupload'])) {
-     
-    if(preg_match('/[.](jpg)|(gif)|(png)$/i', $_FILES['fupload']['name'])) {
-         
-        $filename = $_FILES['fupload']['name'];
-        $l_filename = strtolower($filename);
-        $source = $_FILES['fupload']['tmp_name'];   
-        $target = FULL_DIR . $l_filename;
-         
-        move_uploaded_file($source, $target);
-         
-        createSmallImages($l_filename);     
-        
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-    }
 }
 ?>
