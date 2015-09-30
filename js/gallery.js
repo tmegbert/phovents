@@ -1,6 +1,12 @@
 var rw = getRowWidth();
+var samples = ["Powell", "Zion", "Clouds", "Arches"];
 
 $(document).ready(function() {
+    var phovent = document.getElementById('phovent').value;
+    if(samples.indexOf(phovent) >= 0){
+        document.getElementById('add_photo').style.visibility = "hidden";
+    }
+
     getHTML(jsArray);
 });
 
@@ -126,13 +132,15 @@ function getHTML(jsArray)
                 downloadIcon.src = 'images/download.png';
                 downloadIcon.style.position = 'absolute';
                 downloadIcon.style.height = 32;
+                downloadIcon.style.zIndex = "1";
+
+                downloadAnchor.appendChild(downloadIcon);
+                downloadDiv.appendChild(downloadAnchor);
+                mainDiv.appendChild(downloadDiv);
 
                 anchorParent.appendChild(imageElement);
-                downloadAnchor.appendChild(downloadIcon);
                 imageDiv.appendChild(anchorParent);
-                downloadDiv.appendChild(downloadAnchor);
                 mainDiv.appendChild(imageDiv);
-                mainDiv.appendChild(downloadDiv);
                 
                 if(j!=count - 1) {
                     left += newWidthArray[j] + rowSpaces[index++];
@@ -221,13 +229,15 @@ function getHTML(jsArray)
                 downloadIcon.src = 'images/download.png';
                 downloadIcon.style.position = 'absolute';
                 downloadIcon.style.height = 32;
+                downloadIcon.style.zIndex = "1";
+
+                downloadAnchor.appendChild(downloadIcon);
+                downloadDiv.appendChild(downloadAnchor);
+                mainDiv.appendChild(downloadDiv);
 
                 anchorParent.appendChild(imageElement);
-                downloadAnchor.appendChild(downloadIcon);
                 imageDiv.appendChild(anchorParent);
-                downloadDiv.appendChild(downloadAnchor);
                 mainDiv.appendChild(imageDiv);
-                mainDiv.appendChild(downloadDiv);
                 
                 left += newWidthArray[j] + rowSpaces[index++];
             }

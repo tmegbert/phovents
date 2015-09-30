@@ -124,6 +124,7 @@ function showDialog(action)
     } else {
         document.getElementById('cardAction').value = "edit";
     }
+    document.getElementById('name').focus();
 }
 
 function hideDialog()
