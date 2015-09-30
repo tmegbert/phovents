@@ -16,26 +16,34 @@ if($_POST['phoVent']){
     $phovent = $_COOKIE['Arches'];
 }
 
-$thumbDir = "images/magic/" . $phovent . "/thumb";
-$midsizeDir = "images/magic/" . $phovent . "/midsize";
-$fullsizeDir = "images/magic/" . $phovent . "/fullsize";
-$images = array_diff(scandir($thumbDir), array('..', '.'));
+$m = new MongoClient();
+$db = $m->phovents;
+$exists = $db->instances->findOne(array("name" => $phovent));
+if($exists == NULL){
+    setcookie("phoError", 2);
+    header("Location: http://www.nerkasoft.com/phovents");
+} else {
+    $thumbDir = "images/magic/" . $phovent . "/thumb";
+    $midsizeDir = "images/magic/" . $phovent . "/midsize";
+    $fullsizeDir = "images/magic/" . $phovent . "/fullsize";
+    $images = array_diff(scandir($thumbDir), array('..', '.'));
 
-$imageWidths = array();
-$index = 0;
-foreach($images as $image){
-    $thumb = $thumbDir . "/" . $image;
+    $imageWidths = array();
+    $index = 0;
+    foreach($images as $image){
+        $thumb = $thumbDir . "/" . $image;
 
-    //Read original image and create Imagick object
-    $imageD=new Imagick($thumb);
-    $d = $imageD->getImageGeometry(); 
-    $w = $d['width']; 
-    $imageWidths[$index]['image'] = $fullsizeDir . "/" . $image;
-    $imageWidths[$index]['midsize'] = $midsizeDir . "/" . $image;
-    $imageWidths[$index]['thumb'] = $thumb;
-    $imageWidths[$index]['name'] = $image;
-    $imageWidths[$index]['width'] = $w;
-    $index++;
+        //Read original image and create Imagick object
+        $imageD=new Imagick($thumb);
+        $d = $imageD->getImageGeometry(); 
+        $w = $d['width']; 
+        $imageWidths[$index]['image'] = $fullsizeDir . "/" . $image;
+        $imageWidths[$index]['midsize'] = $midsizeDir . "/" . $image;
+        $imageWidths[$index]['thumb'] = $thumb;
+        $imageWidths[$index]['name'] = $image;
+        $imageWidths[$index]['width'] = $w;
+        $index++;
+    }
 }
 
 //var_dump($imageWidths);

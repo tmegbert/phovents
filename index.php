@@ -11,7 +11,8 @@ session_start();
 
     $error = "";
     $errors = array("This account is already in use, please try another",
-                "Username or password was incorrect, please try other credentials"
+        "Username or password was incorrect, please try other credentials",
+        "User not authorized for this phoVent"
     );
 
     $phoError = $_COOKIE['phoError'];
