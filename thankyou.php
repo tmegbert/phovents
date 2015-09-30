@@ -1,4 +1,12 @@
 <?php
+/*******************************************************
+ * thankyou.php
+ *
+ * @author      Tarrence Egbert
+ * @copyright   2015 Adobe Systems Inc.
+ *
+ ******************************************************/
+
     $email = $_POST['email'];
     $m = new MongoClient();
     $db = $m->phovents;

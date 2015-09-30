@@ -1,4 +1,12 @@
 <?php
+/*******************************************************
+ * mgmt.php
+ *
+ * @author      Tarrence Egbert
+ * @copyright   2015 Adobe Systems Inc.
+ *
+ ******************************************************/
+
     $error = "";
     $fullName = "";
     $now = time();

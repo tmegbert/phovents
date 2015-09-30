@@ -37,3 +37,7 @@ function searchKeyPress(e, dialog)
     }
     return true;
 }
+
+window.onload = function() {
+    document.getElementById("phoVent").focus();
+};

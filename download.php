@@ -1,6 +1,14 @@
 <?php
-if($_GET['pv']){
-    $phovent = $_GET['pv'];
+/*******************************************************
+ * download.php
+ *
+ * @author      Tarrence Egbert
+ * @copyright   2015 Adobe Systems Inc.
+ *
+ ******************************************************/
+
+if($_COOKIE['phovent']){
+    $phovent = $_COOKIE['phovent'];
 } else {
     $phovent = "Arches";
 }

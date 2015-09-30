@@ -1,4 +1,12 @@
 <?php
+/*******************************************************
+ * index.php
+ *
+ * @author      Tarrence Egbert
+ * @copyright   2015 Adobe Systems Inc.
+ *
+ ******************************************************/
+
 session_start();
 
     $error = "";
@@ -99,7 +107,7 @@ session_start();
                 <div id="in_div">
                     <form id="phoForm" action="gallery.php" method="POST">
                         <div class="left">
-                            <input class="input" type="text" name="phoVent"/> 
+                            <input id="phoVent" class="input" type="text" name="phoVent"/> 
                         </div>
                         <div class="right" id="mgb_div">
                             <button class="gbutton" type="button" onClick="document.forms['phoForm'].submit()">Go</button> 

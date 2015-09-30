@@ -40,7 +40,6 @@ function getHTML(jsArray)
     var total = 0;
     var rowTop = 0;
     var phoIndex = 0;
-    var phovent = document.getElementById('phovent').value;
     var mainDiv = document.createElement('div');;
     mainDiv.id = "gallery_div";
     mainDiv.className = "layout-row";
@@ -121,7 +120,7 @@ function getHTML(jsArray)
                 downloadDiv.style.left = left + 20;
 
                 var downloadAnchor = document.createElement('a');
-                downloadAnchor.setAttribute('href', 'download.php?download_file=' + jsArray[phoIndex].name + "&pv=" + phovent);
+                downloadAnchor.setAttribute('href', 'download.php?download_file=' + jsArray[phoIndex].name);
 
                 var downloadIcon = document.createElement('img');
                 downloadIcon.src = 'images/download.png';
@@ -216,7 +215,7 @@ function getHTML(jsArray)
                 downloadDiv.style.left = left + 20;
 
                 var downloadAnchor = document.createElement('a');
-                downloadAnchor.setAttribute('href', 'download.php?download_file=' + jsArray[phoIndex].name + "&pv=" + phovent);
+                downloadAnchor.setAttribute('href', 'download.php?download_file=' + jsArray[phoIndex].name);
 
                 var downloadIcon = document.createElement('img');
                 downloadIcon.src = 'images/download.png';

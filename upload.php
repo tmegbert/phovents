@@ -1,4 +1,12 @@
 <?php
+/*******************************************************
+ * upload.php
+ *
+ * @author      Tarrence Egbert
+ * @copyright   2015 Adobe Systems Inc.
+ *
+ ******************************************************/
+
 $phovent = $_POST['phovent'];
 setcookie('phovent', $phovent);
 

@@ -1,4 +1,12 @@
 <?php
+/*******************************************************
+ * signin.php
+ *
+ * @author      Tarrence Egbert
+ * @copyright   2015 Adobe Systems Inc.
+ *
+ ******************************************************/
+
     $m = new MongoClient();
     $db = $m->phovents;
     $users = $db->users->findOne();

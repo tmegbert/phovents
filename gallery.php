@@ -1,6 +1,15 @@
 <?php
+/*******************************************************
+ * gallery.php
+ *
+ * @author      Tarrence Egbert
+ * @copyright   2015 Adobe Systems Inc.
+ *
+ ******************************************************/
+
 if($_POST['phoVent']){
     $phovent = $_POST['phoVent'];
+    setcookie('phovent', $phovent);
 } else if($_COOKIE['phovent']){
     $phovent = $_COOKIE['phovent'];
 } else {

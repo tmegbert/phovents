@@ -1,4 +1,11 @@
 <?php
+/*******************************************************
+ * createDirImages.php
+ *
+ * @author      Tarrence Egbert
+ * @copyright   2015 Adobe Systems Inc.
+ *
+ ******************************************************/
 
 $orig = $argv[1];
 $fullsizeDir = $orig . "/fullsize";
