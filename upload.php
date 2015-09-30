@@ -1,12 +1,13 @@
 <?php
 $phovent = $_POST['phovent'];
+setcookie('phovent', $phovent);
 
 define('THUMB_WIDTH', 300);
 define('MID_WIDTH', 640);
 define('TARGET','images/magic/' . $phovent);
 define('FULL_DIR','images/magic/' . $phovent . '/fullsize/');
 define('MID_DIR','images/magic/' . $phovent . '/midsize/');
-define('THUMB_DIR','images/magic/' . $phovent . '/thumbs/');
+define('THUMB_DIR','images/magic/' . $phovent . '/thumb/');
 
 if(!file_exists(TARGET)){
     mkdir(TARGET);
@@ -65,6 +66,8 @@ if(isset($_FILES['fupload'])) {
         move_uploaded_file($source, $target);
          
         createSmallImages($l_filename);     
+        
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 }
 ?>

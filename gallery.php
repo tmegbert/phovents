@@ -1,5 +1,12 @@
 <?php
-$phovent = $_POST['phoVent'];
+if($_POST['phoVent']){
+    $phovent = $_POST['phoVent'];
+} else if($_COOKIE['phovent']){
+    $phovent = $_COOKIE['phovent'];
+} else {
+    $phovent = $_COOKIE['Arches'];
+}
+
 $thumbDir = "images/magic/" . $phovent . "/thumb";
 $midsizeDir = "images/magic/" . $phovent . "/midsize";
 $fullsizeDir = "images/magic/" . $phovent . "/fullsize";
@@ -29,6 +36,7 @@ foreach($images as $image){
     <title>phoVents</title>
     <script language="JavaScript" type="text/javascript" src="js/s_code.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <link rel="stylesheet" href="css/common.css" type="text/css">
     <link rel="stylesheet" href="css/gallery.css" type="text/css">
     <link rel="stylesheet" href="lightbox/lightbox.css" type="text/css" media="screen">
     <script type="text/javascript" src="lightbox/lightbox.js"></script>
@@ -63,13 +71,18 @@ foreach($images as $image){
         var s_code=s.t();if(s_code)document.write(s_code)//-->
     </script>
     <div id="blackBar">
+        <div class="left home">
+            <a href="index.php">
+                <img src="images/pv.png" alt="Home" height="50" width="50" />
+            </a>
+        </div>
         <div class="gallery_title">phoVent&nbsp;&nbsp;&nbsp;&nbsp;<?=$phovent?></div>
         <div id="add_photo">
             <form enctype="multipart/form-data" action="upload.php" method="post">
-                + Add a photo 
-                <input type="file" name="fupload" />
-                <input type="submit" value="Go!" />
-                <input type="hidden" name="phovent" value="<?=$phovent?>">
+                <div id="add_photo-label">+ Add a photo</div>
+                <input id="fileupload" type="file" name="fupload" />
+                <input type="submit" value="Upload" />
+                <input id="phovent" type="hidden" name="phovent" value="<?=$phovent?>">
             </form>
         </div>
     </div>

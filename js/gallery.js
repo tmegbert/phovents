@@ -33,13 +33,14 @@ function removeDOMClass(classname)
             list[i].parentElement.removeChild(list[i]);
 }
 
-function getHTML()
+function getHTML(jsArray)
 {
     var ratios = new Array();
     var count = 0;
     var total = 0;
     var rowTop = 0;
     var phoIndex = 0;
+    var phovent = document.getElementById('phovent').value;
     var mainDiv = document.createElement('div');;
     mainDiv.id = "gallery_div";
     mainDiv.className = "layout-row";
@@ -120,7 +121,7 @@ function getHTML()
                 downloadDiv.style.left = left + 20;
 
                 var downloadAnchor = document.createElement('a');
-                downloadAnchor.setAttribute('href', 'download.php?download_file=' + jsArray[phoIndex].name);
+                downloadAnchor.setAttribute('href', 'download.php?download_file=' + jsArray[phoIndex].name + "&pv=" + phovent);
 
                 var downloadIcon = document.createElement('img');
                 downloadIcon.src = 'images/download.png';
@@ -215,7 +216,7 @@ function getHTML()
                 downloadDiv.style.left = left + 20;
 
                 var downloadAnchor = document.createElement('a');
-                downloadAnchor.setAttribute('href', 'download.php?download_file=' + jsArray[phoIndex].name);
+                downloadAnchor.setAttribute('href', 'download.php?download_file=' + jsArray[phoIndex].name + "&pv=" + phovent);
 
                 var downloadIcon = document.createElement('img');
                 downloadIcon.src = 'images/download.png';
