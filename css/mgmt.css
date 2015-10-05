@@ -80,6 +80,12 @@ body {
 
 #cardText {
     float : left;
+    font-weight : bold;
+    color : #5906c6;
+}
+
+.link {
+    text-decoration : none;
 }
 
 #delCard {

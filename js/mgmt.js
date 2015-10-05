@@ -18,6 +18,11 @@ function populateCards()
         var name_div = document.createElement('div');
         var text_div = document.createElement('div');
         text_div.id = "cardText";
+        document.cookie = "phoauth=authorized";
+        var aTag = document.createElement('a');
+        aTag.className = "link";
+        aTag.setAttribute('href', "gallery.php");
+
         var edit_div = document.createElement('div');
         edit_div.id = "editCard";
         var edit_button = document.createElement('button');
@@ -59,7 +64,9 @@ function populateCards()
         del_form.appendChild(owner);
         del_form.appendChild(action);
 
-        text_div.innerHTML = phovents[i]['name'];
+        aTag.innerHTML = phovents[i]['name'];
+        aTag.setAttribute("onclick", "setPhovent('" + phovents[i]['name'] + "')");
+        text_div.appendChild(aTag);
         name_div.appendChild(text_div);
         name_div.appendChild(del_form);
         name_div.appendChild(edit_div);
@@ -86,6 +93,11 @@ function populateCards()
 
         content.appendChild(card_div);
     }
+}
+
+function setPhovent(name)
+{
+    document.cookie="phovent=" + name;
 }
 
 function addCard()

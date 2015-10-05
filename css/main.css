@@ -35,12 +35,7 @@ body {
 }
 
 .gbutton {
-    font-size : 14px;
-}
-
-#mgb_div {
-    margin-top : 6px;
-    margin-left : 10px;
+    font-size : 24px;
 }
 
 #go_button {
@@ -105,7 +100,7 @@ body {
 }
 
 #content {
-    width : 475px;
+    width : 500px;
     margin-right : auto;
     margin-left : auto;
     margin-top : 50px;
@@ -113,18 +108,26 @@ body {
 
 #name_div { 
     float : left;
-    margin-right : 10px;
     font-size : 30px;
+    width : 26%;
 }
 
 #in_div {
     float : left;
     margin-top : 2px;
+    width : 61%;
+}
+
+#mgb_div {
+    float : left;
+    margin-top : 3px;
+    margin-left : 10px;
 }
 
 #samples {
     margin-top : 10px;
     margin-bottom : 40px;
+    margin-left : 100px;
     float : left;
 }
 
@@ -154,6 +157,19 @@ body {
     background-color: white;
     z-index:1002;
     overflow: auto;
+}
+
+.sbutton {
+    font-size : 15px;
+}
+
+#signin_button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width : 70px;
 }
 
 .register_content {

@@ -104,17 +104,15 @@ session_start();
                 <img src="images/phovents_logo.png"/>
             </div>
             <div id="content">
-                <div id="name_div">phoVent</div>
-                <div id="in_div">
-                    <form id="phoForm" action="gallery.php" method="POST">
-                        <div class="left">
-                            <input id="phoVent" class="input" type="text" name="phoVent"/> 
-                        </div>
-                        <div class="right" id="mgb_div">
-                            <button class="gbutton" type="button" onClick="document.forms['phoForm'].submit()">Go</button> 
-                        </div>
-                    </form>
-                </div>
+                <form id="phoForm" action="gallery.php" method="POST">
+                    <div id="name_div">phoVent</div>
+                    <div id="in_div">
+                        <input id="phoVent" class="input" type="text" name="phoVent"/> 
+                    </div>
+                    <div id="mgb_div">
+                        <button class="gbutton" type="button" onClick="document.forms['phoForm'].submit()">Go</button> 
+                    </div>
+                </form>
                 <div id="samples">Samples available: Powell, Zion, Clouds, Arches</div>
                 <div id="reg_info">
                     <div>If you would like to create phoVents to share with your friends:</div>
@@ -143,7 +141,7 @@ session_start();
                         </div>
                         <div class="clear">
                             <div><button id="cancel_button" type="button" onClick="hideLoginDialog()">Cancel</button></div>
-                            <div><button id="go_button" class="gbutton" type="button" onClick="document.forms['signinForm'].submit()">Sign in</button></div>
+                            <div><button id="signin_button" class="sbutton" type="button" onClick="document.forms['signinForm'].submit()">Sign in</button></div>
                         </div>
                     </form>
                 </div>

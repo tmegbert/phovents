@@ -41,6 +41,7 @@ function removeDOMClass(classname)
 
 function getHTML(jsArray)
 {
+    var is_auth = false;
     var ratios = new Array();
     var count = 0;
     var total = 0;
@@ -50,6 +51,11 @@ function getHTML(jsArray)
     mainDiv.id = "gallery_div";
     mainDiv.className = "layout-row";
     mainDiv.style.marginLeft = "40px";
+    var auth = readCookie('phoauth');
+    if(auth == "authorized"){
+        is_auth = true;
+    }
+
     for(i = 0; i < jsArray.length; ++i){
         var imageW = jsArray[i].width;
         if((total + imageW) <= rw){
@@ -133,6 +139,27 @@ function getHTML(jsArray)
                 downloadIcon.style.position = 'absolute';
                 downloadIcon.style.height = 32;
                 downloadIcon.style.zIndex = "1";
+
+                if(is_auth){
+                    // delete icon div
+                    var deleteDiv = document.createElement('div');
+                    deleteDiv.style.position = 'relative';
+                    deleteDiv.style.top = rowTop + height - 40;
+                    deleteDiv.style.left = left + newWidthArray[j] - 50;
+
+                    var deleteAnchor = document.createElement('a');
+                    deleteAnchor.setAttribute('href', 'delete.php?delete_file=' + jsArray[phoIndex].name);
+
+                    var deleteIcon = document.createElement('img');
+                    deleteIcon.src = 'images/delete_32x32.png';
+                    deleteIcon.style.position = 'absolute';
+                    deleteIcon.style.height = 32;
+                    deleteIcon.style.zIndex = "1";
+
+                    deleteAnchor.appendChild(deleteIcon);
+                    deleteDiv.appendChild(deleteAnchor);
+                    mainDiv.appendChild(deleteDiv);
+                }
 
                 downloadAnchor.appendChild(downloadIcon);
                 downloadDiv.appendChild(downloadAnchor);
@@ -231,6 +258,27 @@ function getHTML(jsArray)
                 downloadIcon.style.height = 32;
                 downloadIcon.style.zIndex = "1";
 
+                if(is_auth){
+                    // delete icon div
+                    var deleteDiv = document.createElement('div');
+                    deleteDiv.style.position = 'relative';
+                    deleteDiv.style.top = rowTop + height - 40;
+                    deleteDiv.style.left = left + newWidthArray[j] - 50;
+
+                    var deleteAnchor = document.createElement('a');
+                    deleteAnchor.setAttribute('href', 'delete.php?delete_file=' + jsArray[phoIndex].name);
+
+                    var deleteIcon = document.createElement('img');
+                    deleteIcon.src = 'images/delete_32x32.png';
+                    deleteIcon.style.position = 'absolute';
+                    deleteIcon.style.height = 32;
+                    deleteIcon.style.zIndex = "1";
+
+                    deleteAnchor.appendChild(deleteIcon);
+                    deleteDiv.appendChild(deleteAnchor);
+                    mainDiv.appendChild(deleteDiv);
+                }
+
                 downloadAnchor.appendChild(downloadIcon);
                 downloadDiv.appendChild(downloadAnchor);
                 mainDiv.appendChild(downloadDiv);
@@ -250,4 +298,30 @@ function getRowWidth()
 {
     var browserW = window.innerWidth - 100;
     return browserW;
+}
+
+function createCookie(name,value) 
+{
+    var date = new Date();
+    date.setTime(date.getTime()+(24*60*60*1000));
+    var expires = "; expires="+date.toGMTString();
+
+    document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function readCookie(name) 
+{
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) 
+{
+    createCookie(name,"",-1);
 }
