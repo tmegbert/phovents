@@ -132,7 +132,7 @@ session_start();
                     <form id="signinForm" action="mgmt.php" method="POST">
                         <div id="d_title">Sign-in</div>
                         <div class="clear">
-                            <div class="label">e-Mail</div>
+                            <div class="label">Username</div>
                             <div class="input_box"><input id="s_email" class="input" type="text" name="email"/></div>
                         </div>
                         <div class="clear">
@@ -156,16 +156,16 @@ session_start();
                             <div class="input_box"><input id="r_last" class="input" type="text" name="lastname"/></div>
                         </div>
                         <div class="clear">
-                            <div class="label">e-Mail</div>
+                            <div class="label">Username</div>
                             <div class="input_box"><input id="r_email" class="input" type="text" name="email"/></div>
                         </div>
                         <div class="clear">
-                            <div class="label">passWord</div>
+                            <div class="label">Password</div>
                             <div class="input_box"><input id="r_pass" class="input" type="password" name="password" onKeyPress="return searchKeyPress(event, 'register');" /></div>
                         </div>
                         <div class="clear">
                             <div><button id="cancel_button" type="button" onClick="hideRegDialog()">Cancel</button></div>
-                            <div><button id="reg_button" class="gbutton" type="button" onClick="document.forms['registerForm'].submit()">Register</button></div>
+                            <div><button id="reg_button" type="button" onClick="document.forms['registerForm'].submit()">Register</button></div>
                         </div>
                     </form>
                 </div>

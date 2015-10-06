@@ -51,9 +51,12 @@ function getHTML(jsArray)
     mainDiv.id = "gallery_div";
     mainDiv.className = "layout-row";
     mainDiv.style.marginLeft = "40px";
-    var auth = readCookie('phoauth');
-    if(auth == "authorized"){
+    var user = readCookie('phouser');
+    if(user){
+        document.getElementById('mg_icon').style.visibility = "visible";
         is_auth = true;
+    } else {
+        document.getElementById('mg_icon').style.visibility = "hidden";
     }
 
     for(i = 0; i < jsArray.length; ++i){

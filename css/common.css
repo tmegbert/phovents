@@ -75,3 +75,11 @@
     margin-bottom: 10px;
     font-size:8pt;
 }
+
+.error {
+    color : red;
+    margin-top : 100px;
+    border : 1px solid red;
+    height : 30px;
+    line-height : 30px;
+}

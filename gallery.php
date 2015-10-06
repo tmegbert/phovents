@@ -89,8 +89,11 @@ if($exists == NULL){
     </script>
     <div id="blackBar">
         <div class="left home">
-            <a href="index.php">
-                <img src="images/pv.png" alt="Home" height="50" width="50" />
+            <a href="signout.php">
+                <img src="images/signout.png" alt="Home" height="50" width="50" />
+            </a>
+            <a href="mgmt.php">
+                <img id="mg_icon" src="images/manage.png" alt="Home" height="50" width="50" />
             </a>
         </div>
         <div class="gallery_title">phoVent&nbsp;&nbsp;&nbsp;&nbsp;<?=$phovent?></div>

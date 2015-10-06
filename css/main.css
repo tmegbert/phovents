@@ -48,6 +48,7 @@ body {
 }
 
 #reg_button {
+    font-size : 15px;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -195,14 +196,6 @@ body {
     color : green;
     margin-top : 100px;
     border : 1px solid green;
-    height : 30px;
-    line-height : 30px;
-}
-
-.error {
-    color : red;
-    margin-top : 100px;
-    border : 1px solid red;
     height : 30px;
     line-height : 30px;
 }

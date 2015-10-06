@@ -191,3 +191,12 @@ body {
     font-size : 14px;
     width : 70px;
 }
+
+.mg_error {
+    color : red;
+    margin-top : 400px;
+    border : 1px solid red;
+    height : 30px;
+    line-height : 30px;
+    width : 600px;
+}

@@ -8,36 +8,50 @@
  ******************************************************/
 
     $error = "";
+    $errors = array("The name for this phoVent has already been used.  Please try another.");
+
+    $phoError = $_COOKIE['phoError'];
+    if($phoError != NULL){
+        $error = $errors[$phoError];
+        setcookie('phoError', "");
+    } 
+
     $fullName = "";
     $now = time();
-    if($_POST){
-        $m = new MongoClient();
-        $db = $m->phovents;
+    $m = new MongoClient();
+    $db = $m->phovents;
 
+    if($_POST){
         if($_POST['action'] == 'add'){
             $name = $_POST['name'];
-            $owner = $_POST['owner'];
-            $now = time();
-            $expiration_date = strtotime($_POST['expire_date']);
-            $newPhovent = array("name" => $name,
-                                "description" => $_POST['desc'],
-                                "path" => "/phovents/" . $name,
-                                "expiration_date" => $expiration_date,
-                                "creation_date" => $now,
-                                "owner" => $owner,
-                                "pic_count" => 0
-            );
+            $instances = $db->instances->findOne(array("name" => $name));
+            if(!empty($instances)){
+                setcookie("phoError", 0);
+                header("Location: http://www.nerkasoft.com/phovents/mgmt.php");
+            } else {
+                $owner = $_POST['owner'];
+                $now = time();
+                $expiration_date = strtotime($_POST['expire_date']);
+                $newPhovent = array("name" => $name,
+                                    "description" => $_POST['desc'],
+                                    "path" => "/phovents/" . $name,
+                                    "expiration_date" => $expiration_date,
+                                    "creation_date" => $now,
+                                    "owner" => $owner,
+                                    "pic_count" => 0
+                );
 
-            $db->instances->insert($newPhovent); 
+                $db->instances->insert($newPhovent); 
 
-            $user = $db->users->findOne(array("email" => $owner));
-            $fullName = $user['first_name'] . " " . $user['last_name'];
-            $php_array = iterator_to_array($db->instances->find(array("owner" => $owner)));
-            $phovents = array();
-            foreach($php_array as $id => $data){
-               $phovents[$data['name']] = $data;
-            } 
-            $js_array = json_encode($phovents);
+                $user = $db->users->findOne(array("email" => $owner));
+                $fullName = $user['first_name'] . " " . $user['last_name'];
+                $php_array = iterator_to_array($db->instances->find(array("owner" => $owner)));
+                $phovents = array();
+                foreach($php_array as $id => $data){
+                   $phovents[$data['name']] = $data;
+                } 
+                $js_array = json_encode($phovents);
+            }
         } else if($_POST['action'] == 'edit'){
             $owner = $_POST['owner'];
             $name = $_POST['name'];
@@ -86,10 +100,23 @@
                    $phovents[$data['name']] = $data;
                 } 
                 $js_array = json_encode($phovents);
+                setcookie("phouser", $owner);
             } else {
                 setcookie("phoError", 1);
                 header("Location: http://www.nerkasoft.com/phovents");
             }
+        }
+    } else {
+        $owner = $_COOKIE['phouser'];
+        if(!empty($owner)){
+            $user = $db->users->findOne(array("email" => $owner));
+            $fullName = $user['first_name'] . " " . $user['last_name'];
+            $php_array = iterator_to_array($db->instances->find(array("owner" => $owner)));
+            $phovents = array();
+            foreach($php_array as $id => $data){
+               $phovents[$data['name']] = $data;
+            } 
+            $js_array = json_encode($phovents);
         }
     }
 ?>
@@ -190,6 +217,9 @@
                     <div id="fade" class="black_overlay"></div>
                 </div>
             </div>
+<?  if(!empty($error)):     ?>
+                <div class="mg_error"><?= $error ?></div>
+<?  endif;                  ?>   
         </center>
     </span>
     

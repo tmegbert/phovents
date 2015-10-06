@@ -18,7 +18,6 @@ function populateCards()
         var name_div = document.createElement('div');
         var text_div = document.createElement('div');
         text_div.id = "cardText";
-        document.cookie = "phoauth=authorized";
         var aTag = document.createElement('a');
         aTag.className = "link";
         aTag.setAttribute('href', "gallery.php");
@@ -189,7 +188,7 @@ function timeConverter(UNIX_timestamp){
 
 function signOut()
 {
-    window.location="http://www.nerkasoft.com/phovents";
+    window.location="signout.php";
 }
 
 window.onload = function() {
