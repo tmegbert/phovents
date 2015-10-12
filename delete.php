@@ -13,9 +13,13 @@ if($_COOKIE['phovent']){
     $phovent = "Arches";
 }
  
-$full_path = "/phovents/" . $phovent . "/fullsize/" . $_GET['delete_file']; 
-$mid_path = "/phovents/" . $phovent . "/midsize/" . $_GET['delete_file']; 
-$thumb_path = "/phovents/" . $phovent . "/thumb/" . $_GET['delete_file']; 
+$m = new MongoClient();
+$db = $m->phovents;
+$instance = $db->instances->findOne(array("name" => $phovent));
+
+$full_path = $instance['path'] . "/fullsize/" . $_GET['delete_file']; 
+$mid_path = $instance['path'] . "/midsize/" . $_GET['delete_file']; 
+$thumb_path = $instance['path'] . "/thumb/" . $_GET['delete_file']; 
 
 unlink($full_path);
 unlink($mid_path);

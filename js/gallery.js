@@ -201,7 +201,7 @@ function getHTML(jsArray)
             }
             totalW += (count-1) * 10;
             var amountToAdd = rw - totalW;
-            while(totalW < rw && height < 300){
+            while(totalW < rw && height < 200){
                 height++;
                 totalW = 0;
                 for(j=0;j<count;++j){

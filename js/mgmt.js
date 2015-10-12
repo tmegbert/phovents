@@ -57,14 +57,14 @@ function populateCards()
         var del_form = document.createElement('form');
         del_form.setAttribute('method', "POST");
         del_form.setAttribute('action', "mgmt.php");
-        del_form.id = id;
+        //del_form.id = id;
         del_form.appendChild(del_div);
         del_form.appendChild(name);
         del_form.appendChild(owner);
         del_form.appendChild(action);
 
         aTag.innerHTML = phovents[i]['name'];
-        aTag.setAttribute("onclick", "setPhovent('" + phovents[i]['name'] + "')");
+        aTag.setAttribute("onclick", "setPhovent('" + escape(phovents[i]['name']) + "')");
         text_div.appendChild(aTag);
         name_div.appendChild(text_div);
         name_div.appendChild(del_form);
@@ -96,7 +96,7 @@ function populateCards()
 
 function setPhovent(name)
 {
-    document.cookie="phovent=" + name;
+    document.cookie="phovent=" + unescape(name);
 }
 
 function addCard()

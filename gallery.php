@@ -23,22 +23,25 @@ if($exists == NULL){
     setcookie("phoError", 2);
     header("Location: http://www.nerkasoft.com/phovents");
 } else {
-    $thumbDir = "images/magic/" . $phovent . "/thumb";
-    $midsizeDir = "images/magic/" . $phovent . "/midsize";
-    $fullsizeDir = "images/magic/" . $phovent . "/fullsize";
-    $images = array_diff(scandir($thumbDir), array('..', '.'));
+    $thumbDir = $exists['path'] . "/thumb";
+    $midsizeDir = $exists['path'] . "/midsize";
+    $fullsizeDir = $exists['path'] . "/fullsize";
+    $images = array_diff(scandir($fullsizeDir), array('..', '.'));
 
     $imageWidths = array();
     $index = 0;
     foreach($images as $image){
-        $thumb = $thumbDir . "/" . $image;
+        $base = pathinfo($image, PATHINFO_FILENAME);
+        $thumb = $thumbDir . "/" . $base . ".jpg";
+        $mid = $midsizeDir . "/" . $base . ".jpg";
+        $full = $fullsizeDir . "/" . $image;
 
         //Read original image and create Imagick object
         $imageD=new Imagick($thumb);
         $d = $imageD->getImageGeometry(); 
         $w = $d['width']; 
-        $imageWidths[$index]['image'] = $fullsizeDir . "/" . $image;
-        $imageWidths[$index]['midsize'] = $midsizeDir . "/" . $image;
+        $imageWidths[$index]['image'] = $full;
+        $imageWidths[$index]['midsize'] = $mid;
         $imageWidths[$index]['thumb'] = $thumb;
         $imageWidths[$index]['name'] = $image;
         $imageWidths[$index]['width'] = $w;
@@ -46,7 +49,7 @@ if($exists == NULL){
     }
 }
 
-//var_dump($imageWidths);
+//die(var_dump($imageWidths));
 ?>
 <html>
 <head>

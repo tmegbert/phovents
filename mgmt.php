@@ -34,7 +34,7 @@
                 $expiration_date = strtotime($_POST['expire_date']);
                 $newPhovent = array("name" => $name,
                                     "description" => $_POST['desc'],
-                                    "path" => "/phovents/" . $name,
+                                    "path" => "images/magic/" . strtolower(str_replace("'", "-", str_replace(" ", "_", $name))),
                                     "expiration_date" => $expiration_date,
                                     "creation_date" => $now,
                                     "owner" => $owner,

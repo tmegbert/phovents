@@ -10,12 +10,16 @@
 $phovent = $_POST['phovent'];
 setcookie('phovent', $phovent);
 
-define('THUMB_WIDTH', 300);
-define('MID_WIDTH', 640);
-define('TARGET','images/magic/' . $phovent);
-define('FULL_DIR','images/magic/' . $phovent . '/fullsize/');
-define('MID_DIR','images/magic/' . $phovent . '/midsize/');
-define('THUMB_DIR','images/magic/' . $phovent . '/thumb/');
+$m = new MongoClient();
+$db = $m->phovents;
+$instance = $db->instances->findOne(array("name" => $phovent));
+
+define('THUMB_HEIGHT', 200);
+define('MID_HEIGHT', 640);
+define('TARGET', $instance['path']);
+define('FULL_DIR', $instance['path'] . '/fullsize/');
+define('MID_DIR', $instance['path'] . '/midsize/');
+define('THUMB_DIR', $instance['path'] . '/thumb/');
 
 if(!file_exists(TARGET)){
     mkdir(TARGET);
@@ -29,16 +33,13 @@ if(isset($_FILES['fupload'])) {
      
     if(preg_match('/[.](jpg)|(gif)|(png)$/i', $_FILES['fupload']['name'])) {
          
-        $m = new MongoClient();
-        $db = $m->phovents;
-        $instance = $db->instances->findOne(array("name" => $phovent));
         if($instance != NULL){
             $filename = $_FILES['fupload']['name'];
             $l_filename = strtolower($filename);
             $source = $_FILES['fupload']['tmp_name'];   
             $parts = pathinfo(FULL_DIR . $l_filename);
             $instance['pic_count']++;
-            $t_filename = "pv_" . strtolower($phovent) . "_" . sprintf('%04d',$instance['pic_count']) . "." . $parts['extension'];
+            $t_filename = "pv_" . str_replace("'", "-", str_replace(" ", "_", strtolower($phovent))) . "_" . sprintf('%04d',$instance['pic_count']) . "." . $parts['extension'];
             $target = FULL_DIR . $t_filename;
             $db->instances->update(array("_id" => $instance['_id']), $instance);
              
@@ -72,20 +73,22 @@ function createSmallImages($filename) {
     } else if (preg_match('/[.](png)$/', $filename)) {
         $im = imagecreatefrompng(FULL_DIR . $filename);
     }
+    
+    $jpg_file = pathinfo($filename, PATHINFO_FILENAME) . ".jpg";
      
     $ox = imagesx($im);
     $oy = imagesy($im);
      
-    $nx = THUMB_WIDTH;
-    $ny = floor($oy * (THUMB_WIDTH / $ox));
+    $nx = floor($ox * (THUMB_HEIGHT / $oy));
+    $ny = THUMB_HEIGHT;
     $nm = imagecreatetruecolor($nx, $ny);
     imagecopyresized($nm, $im, 0,0,0,0,$nx,$ny,$ox,$oy);
-    imagejpeg($nm, THUMB_DIR . $filename);
+    imagejpeg($nm, THUMB_DIR . $jpg_file);
 
-    $nx = MID_WIDTH;
-    $ny = floor($oy * (MID_WIDTH / $ox));
+    $nx = floor($ox * (MID_HEIGHT / $oy));
+    $ny = MID_HEIGHT;
     $nm = imagecreatetruecolor($nx, $ny);
     imagecopyresized($nm, $im, 0,0,0,0,$nx,$ny,$ox,$oy);
-    imagejpeg($nm, MID_DIR . $filename);
+    imagejpeg($nm, MID_DIR . $jpg_file);
 }
 ?>
