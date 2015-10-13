@@ -1,3 +1,4 @@
+
 var rw = getRowWidth();
 var samples = ["Powell", "Zion", "Clouds", "Arches"];
 

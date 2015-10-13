@@ -19,6 +19,7 @@ if($_POST['phoVent']){
 $m = new MongoClient();
 $db = $m->phovents;
 $exists = $db->instances->findOne(array("name" => $phovent));
+
 if($exists == NULL){
     setcookie("phoError", 2);
     header("Location: http://www.nerkasoft.com/phovents");
@@ -103,7 +104,7 @@ if($exists == NULL){
         <div id="add_photo">
             <form enctype="multipart/form-data" action="upload.php" method="post">
                 <div id="add_photo-label">+ Add a photo</div>
-                <input id="fileupload" type="file" name="fupload" />
+                <input id="fileupload" type="file" name="fupload[]" multiple="multiple" />
                 <input type="submit" value="Upload" />
                 <input id="phovent" type="hidden" name="phovent" value="<?=$phovent?>">
             </form>

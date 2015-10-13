@@ -7,6 +7,7 @@
  *
  ******************************************************/
 
+//die(var_dump($_FILES));
 $phovent = $_POST['phovent'];
 setcookie('phovent', $phovent);
 
@@ -29,27 +30,30 @@ if(!file_exists(TARGET)){
 }
 
 
-if(isset($_FILES['fupload'])) {
+if(isset($_FILES)) {
+    $index = 0;
+    foreach($_FILES['fupload']['name'] as $filename){
      
-    if(preg_match('/[.](jpg)|(gif)|(png)$/i', $_FILES['fupload']['name'])) {
-         
-        if($instance != NULL){
-            $filename = $_FILES['fupload']['name'];
-            $l_filename = strtolower($filename);
-            $source = $_FILES['fupload']['tmp_name'];   
-            $parts = pathinfo(FULL_DIR . $l_filename);
-            $instance['pic_count']++;
-            $t_filename = "pv_" . str_replace("'", "-", str_replace(" ", "_", strtolower($phovent))) . "_" . sprintf('%04d',$instance['pic_count']) . "." . $parts['extension'];
-            $target = FULL_DIR . $t_filename;
-            $db->instances->update(array("_id" => $instance['_id']), $instance);
+        if(preg_match('/[.](jpg)|(gif)|(png)$/i', $filename)) {
              
-            move_uploaded_file($source, $target);
-             
-            createSmallImages($t_filename);     
-            
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            if($instance != NULL){
+                $l_filename = strtolower($filename);
+                $source = $_FILES['fupload']['tmp_name'][$index];   
+                $parts = pathinfo(FULL_DIR . $l_filename);
+                $instance['pic_count']++;
+                $t_filename = "pv_" . str_replace("'", "-", str_replace(" ", "_", strtolower($phovent))) . "_" . sprintf('%04d',$instance['pic_count']) . "." . $parts['extension'];
+                $target = FULL_DIR . $t_filename;
+                $db->instances->update(array("_id" => $instance['_id']), $instance);
+                 
+                move_uploaded_file($source, $target);
+                 
+                createSmallImages($t_filename);     
+                
+            }
         }
+        $index++;
     }
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 
 function createSmallImages($filename) {

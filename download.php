@@ -12,11 +12,15 @@ if($_COOKIE['phovent']){
 } else {
     $phovent = "Arches";
 }
+
+$m = new MongoClient();
+$db = $m->phovents;
+$instance = $db->instances->findOne(array("name" => $phovent));
  
 ignore_user_abort(true);
 set_time_limit(0); // disable the time limit for this script
 
-$path = "/phovents/" . $phovent . "/fullsize/"; // change the path to fit your websites document structure
+$path = $instance['path'] . "/fullsize/"; // change the path to fit your websites document structure
 $dl_file = preg_replace("([^\w\s\d\-_~,;:\[\]\(\].]|[\.]{2,})", '', $_GET['download_file']); // simple file name validation
 $dl_file = filter_var($dl_file, FILTER_SANITIZE_URL); // Remove (more) invalid characters
 $fullPath = $path.$dl_file;
@@ -44,4 +48,4 @@ if ($fd = fopen ($fullPath, "r")) {
     }
 }
 fclose ($fd);
-exit;
+header('Location: gallery.php');
