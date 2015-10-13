@@ -39,6 +39,21 @@ if(isset($_FILES)) {
             if($instance != NULL){
                 $l_filename = strtolower($filename);
                 $source = $_FILES['fupload']['tmp_name'][$index];   
+                $image = imagecreatefromstring(file_get_contents($source));
+                $exif = exif_read_data($source);
+                if(!empty($exif['Orientation'])) {
+                    switch($exif['Orientation']) {
+                        case 8:
+                            $image = imagerotate($image,90,0);
+                            break;
+                        case 3:
+                            $image = imagerotate($image,180,0);
+                            break;
+                        case 6:
+                            $image = imagerotate($image,-90,0);
+                            break;
+                    }
+                }
                 $parts = pathinfo(FULL_DIR . $l_filename);
                 $instance['pic_count']++;
                 $t_filename = "pv_" . str_replace("'", "-", str_replace(" ", "_", strtolower($phovent))) . "_" . sprintf('%04d',$instance['pic_count']) . "." . $parts['extension'];
@@ -47,7 +62,7 @@ if(isset($_FILES)) {
                  
                 move_uploaded_file($source, $target);
                  
-                createSmallImages($t_filename);     
+                createSmallImages($image, $t_filename);     
                 
             }
         }
@@ -56,43 +71,23 @@ if(isset($_FILES)) {
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 
-function createSmallImages($filename) {
-     
-    if(preg_match('/[.](jpg)$/', $filename)) {
-        $im = @imagecreatefromjpeg(FULL_DIR . $filename);
-        if(!$im)
-        {
-            /* Create a black image */
-            $im  = imagecreatetruecolor(150, 30);
-            $bgc = imagecolorallocate($im, 255, 255, 255);
-            $tc  = imagecolorallocate($im, 0, 0, 0);
-
-            imagefilledrectangle($im, 0, 0, 150, 30, $bgc);
-
-            /* Output an error message */
-            imagestring($im, 1, 5, 5, 'Error loading ' . $imgname, $tc);
-        }
-    } else if (preg_match('/[.](gif)$/', $filename)) {
-        $im = imagecreatefromgif(FULL_DIR . $filename);
-    } else if (preg_match('/[.](png)$/', $filename)) {
-        $im = imagecreatefrompng(FULL_DIR . $filename);
-    }
-    
+function createSmallImages($image, $filename) 
+{
     $jpg_file = pathinfo($filename, PATHINFO_FILENAME) . ".jpg";
      
-    $ox = imagesx($im);
-    $oy = imagesy($im);
+    $ox = imagesx($image);
+    $oy = imagesy($image);
      
     $nx = floor($ox * (THUMB_HEIGHT / $oy));
     $ny = THUMB_HEIGHT;
     $nm = imagecreatetruecolor($nx, $ny);
-    imagecopyresized($nm, $im, 0,0,0,0,$nx,$ny,$ox,$oy);
+    imagecopyresized($nm, $image, 0,0,0,0,$nx,$ny,$ox,$oy);
     imagejpeg($nm, THUMB_DIR . $jpg_file);
 
     $nx = floor($ox * (MID_HEIGHT / $oy));
     $ny = MID_HEIGHT;
     $nm = imagecreatetruecolor($nx, $ny);
-    imagecopyresized($nm, $im, 0,0,0,0,$nx,$ny,$ox,$oy);
+    imagecopyresized($nm, $image, 0,0,0,0,$nx,$ny,$ox,$oy);
     imagejpeg($nm, MID_DIR . $jpg_file);
 }
 ?>

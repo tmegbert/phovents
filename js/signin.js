@@ -105,7 +105,7 @@ function getHTML()
                 anchorParent.setAttribute('rel', "lightbox");
 
                 var imageElement = document.createElement('img');
-                imageElement.src = jsArray[i-count+j].image;
+                imageElement.src = jsArray[i-count+j].thumb;
                 imageElement.style.height = height;
                 imageElement.style.position = 'absolute';
                 imageElement.className = "imgele";
@@ -181,7 +181,7 @@ function getHTML()
                 anchorParent.setAttribute('rel', "lightbox");
 
                 var imageElement = document.createElement('img');
-                imageElement.src = jsArray[i-count+j+1].image;
+                imageElement.src = jsArray[i-count+j+1].thumb;
                 imageElement.style.height = height;
                 imageElement.style.position = 'absolute';
                 imageElement.className = "imgele";
