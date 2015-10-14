@@ -23,7 +23,7 @@ $exists = $db->instances->findOne(array("name" => $phovent));
 
 if($exists == NULL){
     setcookie("phoError", 2);
-    header("Location: http://www.nerkasoft.com/phovents");
+    header("Location: index.php");
 } else {
     $thumbDir = $exists['path'] . "/thumb";
     $midsizeDir = $exists['path'] . "/midsize";

@@ -27,7 +27,7 @@
             $instances = $db->instances->findOne(array("name" => $name));
             if(!empty($instances)){
                 setcookie("phoError", 0);
-                header("Location: http://www.nerkasoft.com/phovents/mgmt.php");
+                header("Location: mgmt.php");
             } else {
                 $owner = $_POST['owner'];
                 $now = time();
@@ -103,7 +103,7 @@
                 setcookie("phouser", $owner);
             } else {
                 setcookie("phoError", 1);
-                header("Location: http://www.nerkasoft.com/phovents");
+                header("Location: index.php");
             }
         }
     } else {
