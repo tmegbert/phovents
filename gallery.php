@@ -7,6 +7,7 @@
  *
  ******************************************************/
 
+//die(var_dump($phovent));
 if($_POST['phoVent']){
     $phovent = $_POST['phoVent'];
     setcookie('phovent', $phovent);
