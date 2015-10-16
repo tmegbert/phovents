@@ -12,7 +12,8 @@ session_start();
     $error = "";
     $errors = array("This account is already in use, please try another",
         "Username or password was incorrect, please try other credentials",
-        "User not authorized for this phoVent"
+        "User not authorized for this phoVent",
+        "All registration fields are required"
     );
 
     $phoError = $_COOKIE['phoError'];
@@ -24,29 +25,44 @@ session_start();
     $fullName = "";
     $now = time();
     if($_POST){
-        $m = new MongoClient();
-        $db = $m->phovents;
-
-        $salt = uniqid(mt_rand(), true);
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $form = $_POST['form'];
-        $hash = hash('sha512', $password.$salt);
-        $user = $db->users->findOne(array("email" => $email));
-
-        if(!empty($user)){
-            $error = $errors[0];
+        if(empty($_POST['firstname']) ||
+          empty($_POST['lastname']) ||
+          empty($_POST['email']) ||
+          empty($_POST['challenge']) ||
+          empty($_POST['answer']) ||
+          empty($_POST['username']) ||
+          empty($_POST['password'])){ 
+            $error = $errors[3];
         } else {
-            $userObj = array("first_name" => $_POST['firstname'],
-                    "last_name" => $_POST['lastname'],
-                    "email" => $email,
-                    "hash" => $hash,
-                    "last_login" => $now,
-                    "creation_time" => $now,
-                    "salt" => $salt
-            );
-            $db->users->insert($userObj);
-            $comment = "New account has been created";
+            $m = new MongoClient();
+            $db = $m->phovents;
+
+            $salt = uniqid(mt_rand(), true);
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $answer = $_POST['answer'];
+            $form = $_POST['form'];
+            $hash = hash('sha512', $password.$salt);
+            $a_hash = hash('sha512', $answer.$salt);
+            $user = $db->users->findOne(array("username" => $username));
+
+            if(!empty($user)){
+                $error = $errors[0];
+            } else {
+                $userObj = array("first_name" => $_POST['firstname'],
+                        "last_name" => $_POST['lastname'],
+                        "email" => $_POST['email'],
+                        "challenge" => $_POST['challenge'],
+                        "a_hash" => $a_hash,
+                        "username" => $username,
+                        "hash" => $hash,
+                        "last_login" => $now,
+                        "creation_time" => $now,
+                        "salt" => $salt
+                );
+                $db->users->insert($userObj);
+                $comment = "New account has been created";
+            }
         }
     }
     //$obj = $db->website->findOne();
@@ -107,7 +123,7 @@ session_start();
                 <form id="phoForm" action="gallery.php" method="POST">
                     <div id="name_div">phoVent</div>
                     <div id="in_div">
-                        <input id="phoVent" class="input" type="text" name="phoVent"/> 
+                        <input id="phoVent" class="p_input input" type="text" name="phoVent"/> 
                     </div>
                     <div id="mgb_div">
                         <button class="gbutton" type="button" onClick="document.forms['phoForm'].submit()">Go</button> 
@@ -133,38 +149,84 @@ session_start();
                         <div id="d_title">Sign-in</div>
                         <div class="clear">
                             <div class="label">Username</div>
-                            <div class="input_box"><input id="s_email" class="input" type="text" name="email"/></div>
+                            <div class="input_box"><input id="s_username" class="s_input input" type="text" name="username"/></div>
                         </div>
                         <div class="clear">
                             <div class="label">Password</div>
-                            <div class="input_box"><input id="s_pass" class="input" type="password" name="password" onKeyPress="return searchKeyPress(event, 'login');" /></div>
+                            <div class="input_box"><input id="s_pass" class="s_input input" type="password" name="password" onKeyPress="return searchKeyPress(event, 'login');" /></div>
                         </div>
                         <div class="clear">
-                            <div><button id="cancel_button" type="button" onClick="hideLoginDialog()">Cancel</button></div>
+                            <div></div>
+                            <div class="forgot_desc" onClick="showDialog('forgot')">Forgot password?  Click here</div>
+                        </div>
+                        <div class="clear">
+                            <div><button id="signin_cancel" class="cancel_button" type="button" onClick="hideDialog('login')">Cancel</button></div>
                             <div><button id="signin_button" class="sbutton" type="button" onClick="document.forms['signinForm'].submit()">Sign in</button></div>
+                        </div>
+                    </form>
+                </div>
+                <div id="forgot_light" class="forgot_content">
+                    <form id="forgotForm" action="index.php" method="POST">
+                        <div id="d_title">Reset password</div>
+                        <div class="clear">
+                            <div class="challenge_label">Challenge</div>
+                            <div class="phrase">The challenge phrase goes here</div>
+                        </div>
+                        <div class="clear">
+                            <div class="label">Response</div>
+                            <div class="reset_box"><input id="response" class="r_input input" type="text" name="response"/></div>
+                        </div>
+                        <div class="clear">
+                            <div class="label">New password</div>
+                            <div class="reset_box"><input id="new_pass" class="r_input input" type="password" name="password" onKeyPress="return searchKeyPress(event, 'forgot');" /></div>
+                        </div>
+                        <div class="clear">
+                            <div><button id="forgot_cancel" class="forgot_cancel" type="button" onClick="hideDialog('forgot')">Cancel</button></div>
+                            <div><button id="forgot_button" class="fbutton" type="button" onClick="document.forms['forgotForm'].submit()">Reset</button></div>
                         </div>
                     </form>
                 </div>
                 <div id="register_light" class="register_content">
                     <form id="registerForm" action="" method="POST">
-                        <div>
+                        <div id="d_title">Register</div>
+                        <div class="clear">
                             <div class="label">First name</div>
-                            <div class="input_box"><input id="r_first" class="input" type="text" name="firstname"/></div>
+                            <div class="input_box"><input id="r_first" class="r_input input" type="text" name="firstname"/></div>
                         </div>
                         <div class="clear">
                             <div class="label">Last name</div>
-                            <div class="input_box"><input id="r_last" class="input" type="text" name="lastname"/></div>
+                            <div class="input_box"><input id="r_last" class="r_input input" type="text" name="lastname"/></div>
+                        </div>
+                        <div class="clear">
+                            <div class="label">Email address</div>
+                            <div class="input_box"><input id="r_email" class="r_input input" type="text" name="email"/></div>
+                        </div>
+                        <div class="clear">
+                            <div class="challenge_label">Challenge</div>
+                            <div class="input_box_desc"><input id="r_challenge" class="r_input input" type="text" name="challenge"/></div>
+                        </div>
+                        <div class="clear">
+                            <div></div>
+                            <div class="chall_desc">Phrase or question used for password change verification</div>
+                        </div>
+                        <div class="clear">
+                            <div class="challenge_label">Response</div>
+                            <div class="input_box_desc"><input id="r_answer" class="r_input input" type="text" name="answer"/></div>
+                        </div>
+                        <div class="clear">
+                            <div></div>
+                            <div class="resp_desc">Response to the challenge phrase or question</div>
                         </div>
                         <div class="clear">
                             <div class="label">Username</div>
-                            <div class="input_box"><input id="r_email" class="input" type="text" name="email"/></div>
+                            <div class="input_box"><input id="r_username" class="r_input input" type="text" name="username"/></div>
                         </div>
                         <div class="clear">
                             <div class="label">Password</div>
-                            <div class="input_box"><input id="r_pass" class="input" type="password" name="password" onKeyPress="return searchKeyPress(event, 'register');" /></div>
+                            <div class="input_box"><input id="r_pass" class="r_input input" type="password" name="password" onKeyPress="return searchKeyPress(event, 'register');" /></div>
                         </div>
                         <div class="clear">
-                            <div><button id="cancel_button" type="button" onClick="hideRegDialog()">Cancel</button></div>
+                            <div><button id="reg_cancel" class="cancel_button" type="button" onClick="hideDialog('reg')">Cancel</button></div>
                             <div><button id="reg_button" type="button" onClick="document.forms['registerForm'].submit()">Register</button></div>
                         </div>
                     </form>

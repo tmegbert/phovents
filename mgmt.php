@@ -43,7 +43,7 @@
 
                 $db->instances->insert($newPhovent); 
 
-                $user = $db->users->findOne(array("email" => $owner));
+                $user = $db->users->findOne(array("username" => $owner));
                 $fullName = $user['first_name'] . " " . $user['last_name'];
                 $php_array = iterator_to_array($db->instances->find(array("owner" => $owner)));
                 $phovents = array();
@@ -62,7 +62,7 @@
             $phovent['expiration_date'] = $expiration_date;
             $db->instances->update(array("_id" => $phovent['_id']), $phovent); 
 
-            $user = $db->users->findOne(array("email" => $owner));
+            $user = $db->users->findOne(array("username" => $owner));
             $fullName = $user['first_name'] . " " . $user['last_name'];
             $php_array = iterator_to_array($db->instances->find(array("owner" => $owner)));
             $phovents = array();
@@ -74,7 +74,7 @@
             $owner = $_POST['owner'];
             $db->instances->remove(array("name" => $_POST['name']));
 
-            $user = $db->users->findOne(array("email" => $owner));
+            $user = $db->users->findOne(array("username" => $owner));
             $fullName = $user['first_name'] . " " . $user['last_name'];
             $php_array = iterator_to_array($db->instances->find(array("owner" => $owner)));
             $phovents = array();
@@ -84,10 +84,10 @@
             $js_array = json_encode($phovents);
         } else {
             $salt = uniqid(mt_rand(), true);
-            $owner = $_POST['email'];
+            $owner = $_POST['username'];
             $password = $_POST['password'];
             $hash = hash('sha512', $password.$salt);
-            $user = $db->users->findOne(array("email" => $owner));
+            $user = $db->users->findOne(array("username" => $owner));
 
             $savedHash = $user['hash'];
             $savedSalt = $user['salt'];
@@ -109,7 +109,7 @@
     } else {
         $owner = $_COOKIE['phouser'];
         if(!empty($owner)){
-            $user = $db->users->findOne(array("email" => $owner));
+            $user = $db->users->findOne(array("username" => $owner));
             $fullName = $user['first_name'] . " " . $user['last_name'];
             $php_array = iterator_to_array($db->instances->find(array("owner" => $owner)));
             $phovents = array();

@@ -4,24 +4,34 @@ function showDialog(type)
     if(type == 'login'){
         document.getElementById('signin_light').style.display='block';
         document.getElementById('register_light').style.display='none';
-        document.getElementById('s_email').focus();
+        document.getElementById('forgot_light').style.display='none';
+        document.getElementById('s_username').focus();
+    } else if(type == 'forgot'){
+console.log(document.getElementById('s_username').value);
+        document.getElementById('signin_light').style.display='none';
+        document.getElementById('register_light').style.display='none';
+        document.getElementById('forgot_light').style.display='block';
+        document.getElementById('response').focus();
     } else {
         document.getElementById('signin_light').style.display='none';
+        document.getElementById('forgot_light').style.display='none';
         document.getElementById('register_light').style.display='block';
         document.getElementById('r_first').focus();
     }        
 }
 
-function hideLoginDialog()
+function hideDialog(type)
 {
-    document.getElementById('signin_light').style.display='none';
-    document.getElementById('fade').style.display='none';
-}
-
-function hideRegDialog()
-{
-    document.getElementById('register_light').style.display='none';
-    document.getElementById('fade').style.display='none';
+    if(type == 'login'){
+        document.getElementById('signin_light').style.display='none';
+        document.getElementById('fade').style.display='none';
+    } else if(type == 'forgot'){
+        document.getElementById('forgot_light').style.display='none';
+        document.getElementById('fade').style.display='none';
+    } else {
+        document.getElementById('register_light').style.display='none';
+        document.getElementById('fade').style.display='none';
+    }
 }
 
 function searchKeyPress(e, dialog)

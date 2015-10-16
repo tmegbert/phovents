@@ -58,9 +58,9 @@
                 <img src="images/phovents_logo.png"/>
             </div>
             <div id="content">
-                    <div id="email_div">
-                        <div class="label">eMail</div>
-                        <div class="input_box"><input class="input" type="text" name="email"/></div>
+                    <div id="username_div">
+                        <div class="label">Username</div>
+                        <div class="input_box"><input class="input" type="text" name="username"/></div>
                     </div>
                     <div id="pass_div">
                         <div class="label">Password</div>
