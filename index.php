@@ -13,7 +13,8 @@ session_start();
     $errors = array("This account is already in use, please try another",
         "Username or password was incorrect, please try other credentials",
         "User not authorized for this phoVent",
-        "All registration fields are required"
+        "All registration fields are required",
+        "Challenge response incorrect, password not reset"
     );
 
     $phoError = $_COOKIE['phoError'];
@@ -25,14 +26,30 @@ session_start();
     $fullName = "";
     $now = time();
     if($_POST){
-        if(empty($_POST['firstname']) ||
-          empty($_POST['lastname']) ||
-          empty($_POST['email']) ||
-          empty($_POST['challenge']) ||
-          empty($_POST['answer']) ||
-          empty($_POST['username']) ||
-          empty($_POST['password'])){ 
-            $error = $errors[3];
+        $response = $_POST['response'];
+        if(!empty($response)){  //password reset
+            $m = new MongoClient();
+            $db = $m->phovents;
+            $username = $_COOKIE['username'];
+            $user = $db->users->findOne(array("username" => $username));
+            $r_hash = hash('sha512', $response.$user['salt']);
+            if($r_hash == $user['a_hash']){
+                $p_hash = hash('sha512', $_POST['password'] . $user['salt']);
+                $user['hash'] = $p_hash;
+                $db->users->update(array("_id" => $user['_id']), $user);
+                $comment = "Password has been reset";
+            } else {
+                $error = $errors[4];
+            }
+        } elseif(
+            empty($_POST['firstname']) ||
+            empty($_POST['lastname']) ||
+            empty($_POST['email']) ||
+            empty($_POST['challenge']) ||
+            empty($_POST['answer']) ||
+            empty($_POST['username']) ||
+            empty($_POST['password'])){ 
+                $error = $errors[3];
         } else {
             $m = new MongoClient();
             $db = $m->phovents;
@@ -157,32 +174,11 @@ session_start();
                         </div>
                         <div class="clear">
                             <div></div>
-                            <div class="forgot_desc" onClick="showDialog('forgot')">Forgot password?  Click here</div>
+                            <div class="forgot_desc" onClick="showDialog('forgot')">Forgot password?  Enter username and click here</div>
                         </div>
                         <div class="clear">
                             <div><button id="signin_cancel" class="cancel_button" type="button" onClick="hideDialog('login')">Cancel</button></div>
                             <div><button id="signin_button" class="sbutton" type="button" onClick="document.forms['signinForm'].submit()">Sign in</button></div>
-                        </div>
-                    </form>
-                </div>
-                <div id="forgot_light" class="forgot_content">
-                    <form id="forgotForm" action="index.php" method="POST">
-                        <div id="d_title">Reset password</div>
-                        <div class="clear">
-                            <div class="challenge_label">Challenge</div>
-                            <div class="phrase">The challenge phrase goes here</div>
-                        </div>
-                        <div class="clear">
-                            <div class="label">Response</div>
-                            <div class="reset_box"><input id="response" class="r_input input" type="text" name="response"/></div>
-                        </div>
-                        <div class="clear">
-                            <div class="label">New password</div>
-                            <div class="reset_box"><input id="new_pass" class="r_input input" type="password" name="password" onKeyPress="return searchKeyPress(event, 'forgot');" /></div>
-                        </div>
-                        <div class="clear">
-                            <div><button id="forgot_cancel" class="forgot_cancel" type="button" onClick="hideDialog('forgot')">Cancel</button></div>
-                            <div><button id="forgot_button" class="fbutton" type="button" onClick="document.forms['forgotForm'].submit()">Reset</button></div>
                         </div>
                     </form>
                 </div>
@@ -230,7 +226,6 @@ session_start();
                             <div><button id="reg_button" type="button" onClick="document.forms['registerForm'].submit()">Register</button></div>
                         </div>
                     </form>
-                </div>
                 </div>
                 <div id="fade" class="black_overlay"></div>
             </div>

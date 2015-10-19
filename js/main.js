@@ -4,17 +4,14 @@ function showDialog(type)
     if(type == 'login'){
         document.getElementById('signin_light').style.display='block';
         document.getElementById('register_light').style.display='none';
-        document.getElementById('forgot_light').style.display='none';
         document.getElementById('s_username').focus();
     } else if(type == 'forgot'){
-console.log(document.getElementById('s_username').value);
         document.getElementById('signin_light').style.display='none';
         document.getElementById('register_light').style.display='none';
-        document.getElementById('forgot_light').style.display='block';
-        document.getElementById('response').focus();
+        document.cookie="username=" + document.getElementById('s_username').value;    
+        window.location="forgot.php";
     } else {
         document.getElementById('signin_light').style.display='none';
-        document.getElementById('forgot_light').style.display='none';
         document.getElementById('register_light').style.display='block';
         document.getElementById('r_first').focus();
     }        

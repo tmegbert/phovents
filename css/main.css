@@ -68,6 +68,7 @@ body {
 .forgot_desc {
     font-size : 15px;
     cursor : default;
+    margin-left : 98px;
 }
 
 .phrase {
