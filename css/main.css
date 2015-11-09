@@ -3,6 +3,14 @@ body {
     font-family : Arial;
 }
 
+.error {
+	display : none;
+}
+
+.comment {
+	display : none;
+}
+
 .input {
     font-family : Arial;
     font-size : 20px;

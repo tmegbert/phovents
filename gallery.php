@@ -63,7 +63,7 @@ if($exists == NULL){
     <link rel="stylesheet" href="lightbox/lightbox.css" type="text/css" media="screen">
     <script type="text/javascript" src="lightbox/lightbox.js"></script>
     <script type="text/javascript">
-        var jsArray = <? echo json_encode($imageWidths); ?>;
+        var jsArray = <?= json_encode($imageWidths); ?>;
     </script>
     <script type="text/javascript" src="js/gallery.js"></script>
 </head>
