@@ -1,0 +1,19 @@
+body {
+    font-size : 80px;
+}
+
+input[type='file'] {
+    color : transparent;
+    display : none;
+}
+
+input[type='button'] {
+    width : 400px;
+    height : 110px;
+    font-size : 0px;
+    background-image : url(../images/upload.png)
+}
+
+.image-upload {
+    display: none;
+}

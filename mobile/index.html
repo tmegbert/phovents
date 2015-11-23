@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Take or select photo(s) and upload</title>
+        <script type="text/javascript" src="js/up.js"></script>
+         <link rel="stylesheet" type="text/css" href="css/up.css">
+    </head>
+ 
+    <body>
+        <form id="form1" enctype="multipart/form-data" method="post" action="">
+            <div>
+                <label for="fileToUpload"><img src="images/choose.png"</label>
+                <input type="file" name="fileToUpload" id="fileToUpload" onchange="fileSelected();" accept="image/*" capture="camera" />
+            </div>
+            <div id="details"></div>
+            <div>
+                <input type="button" onclick="uploadFile()" value="Upload" />
+            </div>
+            <div id="progress"></div>
+        </form>
+    </body>
+</html>
