@@ -134,7 +134,7 @@ session_start();
     <span id="main">
         <center>
             <div id="logo">
-                <img src="images/phovents_logo_beta.png"/>
+                <img src="images/phovents_logo.png"/>
             </div>
             <div id="content">
                 <form id="phoForm" action="gallery.php" method="POST">
