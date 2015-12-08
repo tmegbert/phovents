@@ -21,6 +21,7 @@ $m = new MongoClient();
 $db = $m->phovents;
 $exists = $db->instances->findOne(array("name" => $phovent));
 
+$imageWidths = array();
 if($exists == NULL){
     setcookie("phoError", 2);
     header("Location: index.php");
@@ -30,7 +31,6 @@ if($exists == NULL){
     $fullsizeDir = $exists['path'] . "/fullsize";
     $images = array_diff(scandir($fullsizeDir), array('..', '.'));
 
-    $imageWidths = array();
     $index = 0;
     foreach($images as $image){
         $base = pathinfo($image, PATHINFO_FILENAME);

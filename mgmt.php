@@ -10,8 +10,8 @@
     $error = "";
     $errors = array("The name for this phoVent has already been used.  Please try another.");
 
-    $phoError = $_COOKIE['phoError'];
-    if($phoError != NULL){
+    if(array_key_exists('phoError', $_COOKIE)){
+        $phoError = $_COOKIE['phoError'];
         $error = $errors[$phoError];
         setcookie('phoError', "");
     } 
@@ -22,7 +22,7 @@
     $db = $m->phovents;
 
     if($_POST){
-        if($_POST['action'] == 'add'){
+        if(array_key_exists('action', $_POST) && $_POST['action'] == 'add'){
             $name = $_POST['name'];
             $instances = $db->instances->findOne(array("name" => $name));
             if(!empty($instances)){
@@ -52,7 +52,7 @@
                 } 
                 $js_array = json_encode($phovents);
             }
-        } else if($_POST['action'] == 'edit'){
+        } else if(array_key_exists('action', $_POST) && $_POST['action'] == 'edit'){
             $owner = $_POST['owner'];
             $name = $_POST['name'];
             $phovent = $db->instances->findOne(array("name" => $name));
@@ -70,7 +70,7 @@
                $phovents[$data['name']] = $data;
             } 
             $js_array = json_encode($phovents);
-        } else if($_POST['action'] == 'delete'){
+        } else if(array_key_exists('action', $_POST) && $_POST['action'] == 'delete'){
             $owner = $_POST['owner'];
             $db->instances->remove(array("name" => $_POST['name']));
 

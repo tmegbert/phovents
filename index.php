@@ -17,8 +17,7 @@ session_start();
         "Challenge response incorrect, password not reset"
     );
 
-    $phoError = $_COOKIE['phoError'];
-    if($_COOKIE['phoError']){
+    if(array_key_exists('phoError', $_COOKIE)){
         $error = $errors[$_COOKIE["phoError"]];
         setcookie('phoError', "");
     } 
