@@ -41,10 +41,6 @@
 var loadingImage = 'lightbox/loading.gif';		
 var closeButton = 'lightbox/close.gif';		
 
-
-
-
-
 //
 // getPageScroll()
 // Returns array with x,y page scroll values.
@@ -198,11 +194,10 @@ function showLightbox(objLink)
 		// and the image placed outside the viewport
 		var lightboxTop = arrayPageScroll[1] + ((arrayPageSize[3] - 35 - imgPreload.height) / 2);
 		//var lightboxLeft = ((arrayPageSize[0] - 20 - imgPreload.width) / 2);
-		var lightboxLeft = ($(window).width() - 20 - imgPreload.width) / 2;
+	    var lightboxLeft = ($(window).width() - 20 - imgPreload.width) / 2;
 		
 		objLightbox.style.top = (lightboxTop < 0) ? "0px" : lightboxTop + "px";
 		objLightbox.style.left = (lightboxLeft < 0) ? "0px" : lightboxLeft + "px";
-
 
 		objLightboxDetails.style.width = imgPreload.width + 'px';
 		
@@ -348,6 +343,7 @@ function initLightbox()
 	objLightbox.style.display = 'none';
 	objLightbox.style.position = 'absolute';
 	objLightbox.style.zIndex = '100';	
+	objLightbox.style.width = '640';	
 	objBody.insertBefore(objLightbox, objOverlay.nextSibling);
 	
 	// create link
@@ -378,6 +374,7 @@ function initLightbox()
 	// create image
 	var objImage = document.createElement("img");
 	objImage.setAttribute('id','lightboxImage');
+	objImage.style.width = '640';	
 	objLink.appendChild(objImage);
 	
 	// create details div, a container for the caption and keyboard message
