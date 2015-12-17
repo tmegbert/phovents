@@ -28,7 +28,7 @@ $( window ).resize( debouncer( function ( e ) {
     removeDOMClass("imgele");
     removeDOMClass("imgdiv");
     removeDOMClass("layout-row");
-    getHTML();
+    getHTML(jsArray);
     location.reload();
 } ) );
 
