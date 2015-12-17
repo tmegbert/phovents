@@ -67,7 +67,7 @@ if(isset($_FILES)) {
         }
         $index++;
     }
-   // header('Location: ' . $_SERVER['HTTP_REFERER']);
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 
 function createSmallImages($image, $filename) 
