@@ -42,8 +42,6 @@ function removeDOMClass(classname)
 
 function getHTML(jsArray)
 {
-    var line_height = 150;
-    var image_height = 300;
     var is_auth = false;
     var ratios = new Array();
     var count = 0;
@@ -69,6 +67,7 @@ function getHTML(jsArray)
             // image accepted to row
             total += imageW + 10;
         } else { // image too big for row
+            var height = 300;
             var totalW = 0;
             var widthArray = new Array();
             var newWidthArray = new Array();
@@ -79,16 +78,17 @@ function getHTML(jsArray)
                 newWidthArray[j] = Math.round(jsArray[phoIndex].width / 2);
                 totalW += newWidthArray[j];
                 if(typeof ratios[widthArray[j]] === 'undefined') {
-                    ratios[widthArray[j]] = widthArray[j] / image_height;
+                    ratios[widthArray[j]] = widthArray[j] / height;
                 }
             }
+            height = 150;
             totalW += (count-1) * 10;
             var amountToAdd = rw - totalW;
             while(totalW < rw){
-                line_height++;
+                height++;
                 totalW = 0;
                 for(j=0;j<count;++j){
-                    newWidthArray[j] = Math.round(line_height * ratios[widthArray[j]]);
+                    newWidthArray[j] = Math.round(height * ratios[widthArray[j]]);
                     totalW += newWidthArray[j];
                     if(j!=0){totalW += 10};
                 }
@@ -126,14 +126,14 @@ function getHTML(jsArray)
 
                 var imageElement = document.createElement('img');
                 imageElement.src = jsArray[phoIndex].thumb;
-                imageElement.style.height = line_height;
+                imageElement.style.height = height;
                 imageElement.style.position = 'absolute';
                 imageElement.className = "imgele";
 
                 // download icon div
                 var downloadDiv = document.createElement('div');
                 downloadDiv.style.position = 'relative';
-                downloadDiv.style.top = rowTop + line_height - 40;
+                downloadDiv.style.top = rowTop + height - 40;
                 downloadDiv.style.left = left + 20;
 
                 var downloadAnchor = document.createElement('a');
@@ -149,7 +149,7 @@ function getHTML(jsArray)
                     // delete icon div
                     var deleteDiv = document.createElement('div');
                     deleteDiv.style.position = 'relative';
-                    deleteDiv.style.top = rowTop + line_height - 40;
+                    deleteDiv.style.top = rowTop + height - 40;
                     deleteDiv.style.left = left + newWidthArray[j] - 50;
 
                     var deleteAnchor = document.createElement('a');
@@ -179,7 +179,7 @@ function getHTML(jsArray)
                 }
             }
             //new row
-            rowTop += line_height + 10;
+            rowTop += height + 10;
             
             count = 1;
             total = imageW;
@@ -187,7 +187,7 @@ function getHTML(jsArray)
         }
         if(i == jsArray.length - 1){
             //display the last row
-            line_height = 150;
+            height = 300;
             totalW = 0;
             widthArray = new Array();
             newWidthArray = new Array();
@@ -195,19 +195,20 @@ function getHTML(jsArray)
             for(j = 0; j < count; ++j){
                 phoIndex = i-count+j+1;
                 widthArray[j] = jsArray[phoIndex].width;
-                newWidthArray[j] = Math.round(widthArray[j] / 2);
+                newWidthArray[j] = Math.round(jsArray[phoIndex].width / 2);
                 totalW += newWidthArray[j];
                 if(typeof ratios[widthArray[j]] === 'undefined') {
-                    ratios[widthArray[j]] = widthArray[j] / image_height;
+                    ratios[widthArray[j]] = widthArray[j] / height;
                 }
             }
+            height = 150;
             totalW += (count-1) * 10;
             var amountToAdd = rw - totalW;
-            while(totalW < rw && line_height < 200){
-                line_height++;
+            while(totalW < rw && height < 150){
+                height++;
                 totalW = 0;
                 for(j=0;j<count;++j){
-                    newWidthArray[j] = Math.round(line_height * ratios[widthArray[j]]);
+                    newWidthArray[j] = Math.round(height * ratios[widthArray[j]]);
                     totalW += newWidthArray[j];
                     if(j!=0){totalW += 10};
                 }
@@ -244,14 +245,14 @@ function getHTML(jsArray)
 
                 var imageElement = document.createElement('img');
                 imageElement.src = jsArray[phoIndex].thumb;
-                imageElement.style.height = line_height;
+                imageElement.style.height = height;
                 imageElement.style.position = 'absolute';
                 imageElement.className = "imgele";
 
                 // download icon div
                 var downloadDiv = document.createElement('div');
                 downloadDiv.style.position = 'relative';
-                downloadDiv.style.top = rowTop + line_height - 40;
+                downloadDiv.style.top = rowTop + height - 40;
                 downloadDiv.style.left = left + 20;
 
                 var downloadAnchor = document.createElement('a');
@@ -267,7 +268,7 @@ function getHTML(jsArray)
                     // delete icon div
                     var deleteDiv = document.createElement('div');
                     deleteDiv.style.position = 'relative';
-                    deleteDiv.style.top = rowTop + line_height - 40;
+                    deleteDiv.style.top = rowTop + height - 40;
                     deleteDiv.style.left = left + newWidthArray[j] - 50;
 
                     var deleteAnchor = document.createElement('a');
