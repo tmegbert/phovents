@@ -14,7 +14,7 @@ $m = new MongoClient();
 $db = $m->phovents;
 $instance = $db->instances->findOne(array("name" => $phovent));
 
-define('THUMB_HEIGHT', 200);
+define('THUMB_HEIGHT', 300);
 define('MID_HEIGHT', 640);
 define('TARGET', $instance['path']);
 define('FULL_DIR', $instance['path'] . '/fullsize/');
